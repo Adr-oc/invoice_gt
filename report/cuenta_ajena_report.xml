@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="paperformat_cuenta_ajena" model="report.paperformat">
+            <field name="name">Cuenta Ajena</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">50</field>
+            <field name="margin_bottom">70</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">37</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <record id="reporte_cuenta_ajena" model="ir.actions.report">
+            <field name="name">Cuenta Ajena</field>
+            <field name="model">account.move</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">invoice_gt.cuenta_ajena_pdf</field>
+            <field name="report_file">invoice_gt.cuenta_ajena_pdf</field>
+            <field name="binding_model_id" ref="model_account_move"/>
+            <field name="paperformat_id" ref="invoice_gt.paperformat_cuenta_ajena" />
+        </record>
+
+        
+    </data>
+</odoo>

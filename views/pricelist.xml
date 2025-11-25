@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="inherit_product_pricelist_form" model="ir.ui.view">
+            <field name="name">inherit.product.pricelist.form</field>
+            <field name="model">product.pricelist</field>
+            <field name="inherit_id" ref="product.product_pricelist_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='country_group_ids']" position="after">
+                    <separator string="Campos editables" />
+                    <field name="notas_importantes" widget="html" />
+                    <field name="datos_asesor" />
+                    <field name="firmar" invisible="1" />
+                    <field name="firma" invisible="not firmar" />
+                </xpath>
+            </field>
+        </record>
+        <record id="price_list_view" model="ir.ui.view">
+            <field name="name">product.pricelist.form</field>
+            <field name="model">product.pricelist</field>
+            <field name="inherit_id" ref="product.product_pricelist_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='pricelist_settings']" position="inside">
+                    <field name="partner_id" />
+                    <field name="partner_contact1" />
+                    <field name="email" />
+                    <field name="nit" />
+                    <field name="phone" />
+                    <field name="firmar" />
+                    <field name="quanty_min" />
+                    <field name="price" />
+                    <field name="start_date" />
+                    <field name="end_date" />
+                </xpath>
+            </field>
+        </record>
+    </data>
+
+    <record id="action_report_tarifa" model="ir.actions.report">
+        <field name="name">Tarifa Report</field>
+        <field name="model">product.pricelist</field>
+        <field name="report_name">invoice_gt.reporte_tarifa</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_file">invoice_gt/reporte_tarifa</field>
+        <field name="binding_model_id" ref="model_product_pricelist" />
+    </record>
+
+
+    <record id="action_get_letter" model="ir.actions.server">
+        <field name="name">Formato Tarifa</field>
+        <field name="model_id" ref="product.model_product_pricelist" />
+        <field name="binding_model_id" ref="product.model_product_pricelist" />
+        <field name="state">code</field>
+        <field name="code">
+            action = model.get_letter()
+        </field>
+    </record>
+
+
+    <!-- <record id="view_mail_compose_message_form_print" model="ir.ui.view">
+        <field name="name">mail.compose.message.form.print</field>
+        <field name="model">mail.compose.message</field>
+        <field name="inherit_id" ref="mail.email_compose_message_wizard_form"/>
+        <field name="arch" type="xml">
+            <footer>
+                <button name="action_print_message" type="object" string="Imprimir" class="oe_highlight"/>
+            </footer>        
+        </field>
+    </record> -->
+
+
+</odoo>
+  
+   

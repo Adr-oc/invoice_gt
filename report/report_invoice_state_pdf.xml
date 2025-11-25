@@ -1,0 +1,212 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <template id="reporte_estado_cuenta">
+            <t t-call="web.basic_layout">
+                <link rel="stylesheet" href="/invoice_gt/static/src/css/estado_cuenta.css" />
+                <div class="header">
+                    <div class="row">
+                        <img style="height: 130px;width: 250px;"
+                            t-if="current_company_id.logo_header"
+                            t-att-src="image_data_uri(current_company_id.logo_header)"
+                            alt="logo" />
+                        <div class="col-10 text-center">
+                            <span style="display: block!important; font-weight: 700!important"
+                                t-esc="current_company_id.name" />
+                            <span style="display: block!important" t-esc="current_company_id.street" />
+                            <span style="display: block!important"
+                                t-esc="current_company_id.street2" />
+                            <span style="display: block!important" t-esc="current_company_id.city" />
+                            <span t-esc="current_company_id.vat" />
+                        </div>
+                    </div>
+                </div>
+                <t t-set="datas" t-value="json.loads(datas)" />
+
+                <!-- USD Section -->
+                <t t-if="datas.get('invoices_usd')">
+                    <t t-set="currency_label" t-value="'Dólares'" />
+                    <t t-set="bank_name" t-value="datas['usd_account']['bank_name']" />
+                    <t t-set="bank_acc_holder_name"
+                        t-value="datas['usd_account']['acc_holder_name']" />
+                    <t t-set="bank_acc_number" t-value="datas['usd_account']['acc_number']" />
+
+                    <t t-foreach="datas['invoices_usd'].items()" t-as="journal">
+                        <t t-set="currency_invoices" t-value="journal[1]" />
+                        <t t-set="journal_name" t-value="journal[0]" />
+                        <t t-set="currency_name" t-value="'USD'" />
+                        <t t-call="invoice_gt.estado_cuenta_section" />
+                    </t>
+                </t>
+
+                <!-- GTQ Section -->
+                <t t-if="datas.get('invoices_gtq')">
+                    <t t-set="currency_label" t-value="'Quetzales'" />
+                    <t t-set="bank_name" t-value="datas['qtz_account']['bank_name']" />
+                    <t t-set="bank_acc_holder_name"
+                        t-value="datas['qtz_account']['acc_holder_name']" />
+                    <t t-set="bank_acc_number" t-value="datas['qtz_account']['acc_number']" />
+
+                    <t t-foreach="datas['invoices_gtq'].items()" t-as="journal">
+                        <t t-set="currency_invoices" t-value="journal[1]" />
+                        <t t-set="journal_name" t-value="journal[0]" />
+                        <t t-set="currency_name" t-value="'GTQ'" />
+                        <t t-call="invoice_gt.estado_cuenta_section" />
+                    </t>
+                </t>
+            </t>
+        </template>
+
+
+        <template id="estado_cuenta_section">
+            <t t-set="partners" t-value="set(inv['partner_id'] for inv in currency_invoices)" />
+            <t t-foreach="partners" t-as="partner_id">
+                <div class="page">
+                    <div class="head_p">
+                        <div class="moneda text-center">
+                            <h2 class="d-block">Estado de Cuenta al <span t-esc="current_day" /></h2>
+                            <span class="d-block cc">
+                                <t t-esc="currency_label" /> - <t t-esc="journal_name" />
+                            </span>
+                        </div>
+
+                        <div class="text-left col-8 font-weight-normal"
+                            style="font-size:15px!important">
+                            <t t-set="partner" t-value="env['res.partner'].browse(partner_id)" />
+                            <span class="text-left font-weight-bold"
+                                style="text-transform:uppercase; text-align: left; display:block; font-size:20px;"
+                                t-esc="partner.name" />
+                            <span class="text-left" t-esc="partner.street2" />
+                            <span class="text-left">
+                                <span t-esc="partner.city" />
+                                <span t-esc="partner.country_id.name" />
+                            </span>
+                            <span class="text-left d-block">
+                                <strong>e-mail: </strong>
+                                <span t-esc="partner.email" />
+                            </span>
+                            <span class="text-left d-block">
+                                <strong>Teléfono: </strong>
+                                <span t-esc="partner.phone" />
+                            </span>
+                            <span class="text-left">
+                                <strong>NIT: </strong>
+                                <span t-esc="partner.vat" />
+                            </span>
+                        </div>
+                        <div class="d-flex justify-content-end linea">
+                            <strong>GRAN TOTAL <t t-esc="currency_name" />: </strong>
+                            <span t-esc="currency_name" />
+                            <span
+                                t-esc="'{0:,.2f}'.format(sum(inv['amount_total'] for inv in currency_invoices if inv['partner_id'] == partner_id))" />
+                        </div>
+                    </div>
+                    <div class="borde-bottom">
+                        <div class="flex head">
+                            <div>Fecha Doc</div>
+                            <div>Serie</div>
+                            <div>No. Doc</div>
+                            <div>Referencia</div>
+                            <div>Fecha Venc</div>
+                            <div>Días Atraso</div>
+                            <div>Total Fact</div>
+                            <div>Abono</div>
+                            <div>Adeudo Total</div>
+
+                        </div>
+                        <t t-set="total_adeudado" t-value="0" />
+                        <t t-set="total_vencido" t-value="0" />
+                        <div class="lines" t-foreach="currency_invoices" t-as="data">
+                            <t t-if="data['partner_id'] == partner_id">
+                                <div class="flex line"
+                                    style="page-break-inside: avoid; overflow-wrap: break-word;">
+                                    <div class="pad">
+                                        <span t-esc="data['date']" />
+                                    </div>
+                                    <div class="pad">
+                                        <span t-if="data['serie']" t-esc="data['serie']" />
+                                        <span t-else="" t-esc="data['name']" />
+                                    </div>
+                                    <div class="pad">
+                                        <span t-if="data['number']" t-esc="data['number']" />
+                                        <span t-else="" t-esc="data['name']" />
+                                    </div>
+                                    <div class="pad">
+                                        <span t-if="data['referencia_2']" t-esc="data['referencia_2']" />
+                                        <span t-else="" t-esc="data['name']" />
+                                    </div>
+                                    <div
+                                        t-attf-class="pad #{'term' if data['dias_atraso'] > 0 else ''}">
+                                        <span t-esc="data['invoice_date_due']"
+                                            t-att-style="'color: red;' if data['dias_atraso'] > 0 else ''" />
+                                    </div>
+                                    <div
+                                        t-attf-class="pad #{'term' if data['dias_atraso'] > 0 else ''}">
+                                        <span t-esc="data['dias_atraso']" />
+                                    </div>
+                                    <div>
+                                        <span t-esc="currency_name" />
+                                        <span t-esc="'%.2f' % (data['amount_total_signed'])" />
+                                    </div>
+                                    <div>
+                                        <span t-esc="currency_name" />
+                                        <span
+                                            t-esc="'%.2f' % (data['amount_total_signed']-data['amount_residual'])" />
+                                    </div>
+                                    <div class="pad text-right pr">
+                                        <span t-esc="currency_name" />
+                                        <span t-esc="'%.2f' % (data['amount_residual'])" />
+                                    </div>
+                                    <t t-set="total_adeudado"
+                                        t-value="total_adeudado + data['amount_total']" />
+                                    <t t-if="data['dias_atraso'] > 0">
+                                        <t t-set="total_vencido"
+                                            t-value="total_vencido + data['amount_total']" />
+                                    </t>
+
+                                </div>
+                            </t>
+                        </div>
+                        <div class="cont_total">
+                            <div class="d-flex justify-content-end linea">
+                                <strong>Adeudo Total</strong>
+                                <span t-esc="currency_name" />
+                                <span t-esc="'{0:,.2f}'.format(total_adeudado)" />
+                            </div>
+                            <div class="d-flex justify-content-end linea">
+                                <strong>Adeudo Vencido</strong>
+                                <span t-esc="currency_name" />
+                                <span t-esc="'{0:,.2f}'.format(total_vencido)" />
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="custom_footer">
+                    <h4 style="font-weight: 800; text-transform: uppercase;">Datos
+                        Bancarios</h4>
+                    <div class="d-flex row">
+                        <div class="col-3"
+                            style="font-weight: 700; text-transform: uppercase; font-size:12px; margin-right: 2rem;">
+                            <div>Banco</div>
+                            <div>Nombre de la cuenta</div>
+                            <div>Cuenta</div>
+                        </div>
+                        <div style="font-size:12px;">
+                            <div>
+                                <span t-esc="bank_name" />
+                            </div>
+                            <div>
+                                <span t-esc="bank_acc_holder_name" />
+                            </div>
+                            <div>
+                                <span t-esc="bank_acc_number" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p style="page-break-before:always;" />
+            </t>
+        </template>
+    </data>
+</odoo>

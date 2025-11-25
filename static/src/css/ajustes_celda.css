@@ -1,0 +1,18 @@
+ .my_class [data-id="partner_id"]{width: 1000px;}
+
+ .encabezado div{
+    font-size: 25px;
+    font-weight: bold; 
+    margin-top: 15px
+    }
+
+.derecha{
+    text-align: right;
+    margin: 25px
+    }
+
+.datos_cliente{
+    margin-top: 50px;
+    margin-bottom: 50px;
+    }
+

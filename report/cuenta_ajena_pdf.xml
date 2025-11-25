@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<odoo>
+	<data>
+		<template id="cuenta_ajena_pdf">
+			<t t-call="web.basic_layout">	
+                <link rel="stylesheet" href="/invoice_gt/static/src/css/ajustes_celda.css" />
+                <t t-foreach="docs" t-as="o">			
+                    <div class="page"> 
+                        <div class="d-flex">
+                            <div class="col-3">
+                            </div>
+                            <div class="col-6 encabezado">
+                                <t t-if="o.currency_id.id == 2">
+                                    <div>LDolares</div>
+                                </t>
+                                <t t-else="">
+                                    <div>LQuetzales</div>
+                                </t>
+                                <div><span t-esc="o.name"/></div>
+                            </div>
+                            <div class="col-3">
+                            </div>
+                        </div>
+                        <div class="derecha"><span t-esc="o.current_date_format(o.date)"/></div>
+                        <div class="d-flex datos_cliente" >
+                            <div class="col-2">
+                            </div>
+                            <div class="col-8">
+                                <div><span t-esc="o.partner_id.name"/></div>
+                                <div><span t-esc="o.partner_id.street"/></div>
+                                <div class="d-flex">
+                                    <div class="col-4">
+                                        <span t-esc="o.partner_id.vat"/>
+                                    </div>
+                                    <div class="col-4">
+                                        <span t-esc="o.embarque_id_ca.referencia_2"/>
+                                    </div>
+                                    <div class="col-4">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                            </div>
+                        </div>
+                        <div>        
+                            <t t-foreach="o.invoice_line_ids" t-as="linea">
+                                <div class="d-flex">
+                                    <div class="col-1">
+                                        <!-- <span t-esc="o.name"/> -->
+                                    </div>
+                                    <div class="col-2">
+                                        <span t-esc="linea.quantity"/>
+                                    </div>
+                                    <div class="col-4">
+                                        <span t-esc="linea.name"/>
+                                    </div>
+                                    <div class="col-1">
+                                        <span t-esc="o.currency_id.name"/>
+                                    </div>
+                                    <div class="col-2">
+                                        <span t-esc="'{0:,.2f}'.format(linea.price_unit)"/>
+                                    </div>
+                                    <div class="col-2">
+                                        <span t-esc="'{0:,.2f}'.format(linea.price_subtotal)"/>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                        
+                        
+                                
+                    </div>
+                    <div class="footer">
+                       <div class="row">
+                            <div class="col-10">
+                                <div style="margin-left: 70px;"><span t-esc="o.embarque_id_ca.referencia_1"/></div>
+                                <div style="margin-left: 70px;"><span t-esc="o.embarque_id_ca.referencia_3"/></div>
+                                <div style="margin-left: 70px;"><span t-esc="o.embarque_id_ca.name"/></div>
+                                <div style="margin-left: 70px; margin-top: 20px;"><span t-esc="o.primera_mayuscula(o.num_a_letras(o.amount_total))"/></div>
+                            </div>
+                            <div class="col-2 text-right">
+                                <div style="font-zise: 25px"><span t-esc="o.amount_total" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}" /></div>
+                            </div>
+                       </div>
+				    </div>
+                </t>
+			</t>
+		</template>
+	</data>
+</odoo>

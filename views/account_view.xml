@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.actions.act_window" id="invoice_1">
+        <field name="name">Electronic Receipt</field>
+        <field name="res_model">account.move</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="target">current</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <!-- <field name="search_view_id" ref="account.view_account_invoice_filter"></field> -->
+        <!-- <field name="view_id" ref="account.view_invoice_tree"/> -->
+        <field name="context">{'default_type': 'out_invoice', 'default_journal_id' : 153}</field>
+        <field name="domain">[('move_type', '=', 'out_invoice'), ('journal_id', '=', 153)]</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="invoice_2">
+        <field name="name">Electronic Debit Note</field>
+        <field name="res_model">account.move</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="target">current</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="context">{'default_type': 'out_invoice', 'default_journal_id' : 149}</field>
+        <field name="domain">[('move_type', '=', 'out_invoice'), ('journal_id', '=', 149)]</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="invoice_3">
+        <field name="name">Cobro Cuenta de Terceros</field>
+        <field name="res_model">account.move</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="target">current</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="context">{'default_type': 'out_invoice', 'default_journal_id' : 154}</field>
+        <field name="domain">[('move_type', '=', 'out_invoice'), ('journal_id', '=', 154)]</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="invoice_4">
+        <field name="name">Commercial Invoice</field>
+        <field name="res_model">account.move</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="target">current</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="context">{'default_type': 'out_invoice', 'default_journal_id' : 150}</field>
+        <field name="domain">[('move_type', '=', 'out_invoice'), ('journal_id', '=', 150)]</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="invoice_5">
+        <field name="name">Credit Note</field>
+        <field name="res_model">account.move</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="target">current</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="context">{'default_type': 'out_invoice', 'default_journal_id' : 148}</field>
+        <field name="domain">[('move_type', '=', 'out_invoice'), ('journal_id', '=', 148)]</field>
+    </record>
+
+    <menuitem 
+        id="invoice_gt_1" 
+        name="Electronic Receipt" 
+        parent="account.menu_finance_receivables"
+        sequence="2"
+        action="invoice_1"
+        groups="invoice_gt.permission_electronic"
+        />
+
+    <menuitem 
+        id="invoice_gt_2" 
+        name="Electronic Debit Note" parent="account.menu_finance_receivables"
+        sequence="3"
+        groups="invoice_gt.permission_notedebit"
+        action="invoice_2"
+        /> 
+
+    <menuitem 
+    id="invoice_gt_3" 
+    name="Cobro Cuenta de Terceros" parent="account.menu_finance_receivables"
+    sequence="4"
+    groups="invoice_gt.permission_cuenta_terceros"
+    action="invoice_3"
+        /> 
+        
+    <menuitem 
+    id="invoice_gt_4" 
+    name="Commercial Invoice" parent="account.menu_finance_receivables"
+    sequence="5"
+    groups="invoice_gt.permission_credit_note"
+    action="invoice_4"
+    /> 
+
+    <menuitem 
+    id="invoice_gt_5" 
+    name="Credit Note" parent="account.menu_finance_receivables"
+    sequence="5"
+    groups="invoice_gt.permission_credit_note"
+    action="invoice_5"
+    /> 
+
+    <!-- <menuitem 
+        id="sub_informes_proyectos_2" 
+        name="Planilla Pilotos" parent="project.menu_projects"
+        action="informe_date_envio_2"  
+        />
+    <menuitem 
+        id="sub_informes_proyectos_3" 
+        name="Facturar Contenedores" parent="project.menu_projects"
+        action="informe_date_envio_3"  
+        /> -->
+
+
+</odoo>

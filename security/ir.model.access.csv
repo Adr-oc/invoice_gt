@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+send_mail_wizzard_1,invoice_gt_send_mail_wizzard,model_send_mail_wizzard,account.group_account_manager,1,1,1,1
+access_reports_excel,reports.excel,model_excel_reports,base.group_user,1,1,1,1
+access_invoice_wizzard_payments,invoice.wizzard.payments,model_invoice_wizzard_payments,base.group_user,1,1,1,1
+access_invoice_wizzard_list_payments,invoice_wizzard_list_payments,model_invoice_wizzard_list_payments,base.group_user,1,1,1,1

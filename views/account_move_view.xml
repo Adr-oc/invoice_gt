@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="comercial_id_replace">
+            <field name="name">account.move.form</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form" />
+            <field name="arch" type="xml">
+                <field name="partner_bank_id" position="after">
+                    <field name="contrasena" />
+                </field>
+            </field>
+        </record>
+
+    </data>
+
+    <record id="invoice_gt_account_move_view_tree_contra" model="ir.ui.view">
+        <field name="name">account.out.invoice.tree</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_in_invoice_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//list/field[@name='name']" position="after">
+                <field name="contrasena" column_invisible="True" />
+            </xpath>
+        </field>
+    </record>
+
+    <data>
+        <record model="ir.ui.view" id="context_comercial_replace">
+            <field name="name">account.invoice.select</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_account_invoice_filter" />
+            <field name="arch" type="xml">
+                <xpath expr="//search" position="inside">
+                    <field name="contrasena" string="Contraseña"
+                        filter_domain="[('contrasena', 'ilike', self)]" />
+                    <filter string="Contraseñas" name="group_by_contrasena"
+                        context="{'group_by':'contrasena'}" />
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Vista modal_send_email eliminada - account.account_invoice_send_wizard_form no existe en Odoo 19 -->
+    </data>
+</odoo>

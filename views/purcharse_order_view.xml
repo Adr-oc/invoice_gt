@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="invoice_gt_purchase_order" model="ir.ui.view">
+        <field name="name">purchase.order.form</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <field name="currency_id" position="after">
+                <field name="Serie" invisible="company_id != 2" required="company_id == 2"/>
+                <field name="Factura" invisible="company_id != 2" required="company_id == 2"/>
+                <field name="File" invisible="company_id != 2" required="company_id == 2"/>
+            </field>
+            <field name="date_order" position="after">
+                <field name="Pago" invisible="company_id != 2" required="company_id == 2"/>
+            </field>
+            <field name="File" position="after">
+                <field name="contrasena" invisible="company_id != 2"/>
+            </field>
+            <xpath expr="//sheet/group/group[2]" position="after">    
+                <div>
+                    <group string="Embarque">
+                        <field name="referencia_bl" help="Agregue solo el BL" />
+                        <field name="buque_referencia_fel" />
+                    </group>
+                </div>            
+            </xpath>
+        </field>
+    </record>
+
+    <record id="invoice_gt_view_tree" model="ir.ui.view">       
+        <field name="name">purchase.order.inherit.purchase.order.tree</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_kpis_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//list/field[@name='name']" position="after">
+                <field name="contrasena" column_invisible="True"/>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="invoice_gt_purchase_order_busqueda" model="ir.ui.view">       
+        <field name="name">request.quotation.select</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.view_purchase_order_filter"/>
+        <field name="arch" type="xml">
+            <search >
+                <field name="contrasena" string="Contraseña" filter_domain="[('contrasena', 'ilike', self)]"/>
+            </search>
+            <xpath expr="//search/group" position="inside">
+                <filter string="Contraseñas" name="contrasena" context="{'group_by':'contrasena'}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

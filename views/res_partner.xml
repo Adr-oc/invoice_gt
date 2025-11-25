@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="invoice_res_partner" model="ir.ui.view">
+            <field name="name">res.partner.form.vat</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='vat']" position="after">
+                    <field name="nit_hijo" placeholder="NIT CONTACTO HIJO" readonly="not parent_id"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

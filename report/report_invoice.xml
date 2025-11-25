@@ -1,0 +1,172 @@
+<?xml version="1.0" ?>
+<odoo>
+
+    <record id="paperformat_electronic_receipt" model="report.paperformat">
+        <field name="name">Electronic Receipt</field>
+        <field name="default" eval="True"/>
+        <field name="format">Letter</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">40</field>
+        <field name="margin_bottom">25</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">35</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <record id="invoice_gt_invoice_electronic_receip" model="ir.actions.report">
+        <field name="name">Electronic Receipt</field>
+        <field name="model">account.move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">invoice_gt.invoice_electronic_receipt</field>
+        <field name="report_file">invoice_gt.invoice_electronic_receipt</field>
+        <field name="binding_model_id" ref="model_account_move"/>
+        <field name="paperformat_id" ref="invoice_gt.paperformat_electronic_receipt" />
+    </record>
+
+    <record id="paperformat_note_debit" model="report.paperformat">
+        <field name="name">Electronic Debit Note</field>
+        <field name="default" eval="True"/>
+        <field name="format">Letter</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">40</field>
+        <field name="margin_bottom">40</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">35</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <record id="invoice_gt_action_note_debit" model="ir.actions.report">
+        <field name="name">Electronic Debit Note</field>
+        <field name="model">account.move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">invoice_gt.invoice_note_debit</field>
+        <field name="report_file">invoice_gt.invoice_note_debit</field>
+        <field name="binding_model_id" ref="model_account_move"/>
+        <field name="paperformat_id" ref="invoice_gt.paperformat_note_debit" />
+    </record>
+
+
+    <record id="paperformat_cuenta_terceros" model="report.paperformat">
+        <field name="name">Cobro Cuenta de Terceros</field>
+        <field name="default" eval="True"/>
+        <field name="format">Letter</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">40</field>
+        <field name="margin_bottom">25</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">35</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <record id="invoice_gt_action_cuenta_terceros" model="ir.actions.report">
+        <field name="name">Cuenta de Terceros</field>
+        <field name="model">account.move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">invoice_gt.invoice_cuenta_terceros</field>
+        <field name="report_file">invoice_gt.invoice_cuenta_terceros</field>
+        <field name="binding_model_id" ref="model_account_move"/>
+        <field name="paperformat_id" ref="invoice_gt.paperformat_cuenta_terceros" />
+    </record>
+    
+    <record id="paperformat_commercial_invoice" model="report.paperformat">
+        <field name="name">Comercial Invoice</field>
+        <field name="default" eval="True"/>
+        <field name="format">Letter</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">55</field>
+        <field name="margin_bottom">35</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">35</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <record id="invoice_gt_action_commercial_invoice" model="ir.actions.report">
+        <field name="name">Commercial Invoice</field>
+        <field name="model">account.move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">invoice_gt.commercial_invoice</field>
+        <field name="report_file">invoice_gt.commercial_invoice</field>
+        <field name="binding_model_id" ref="model_account_move"/>
+        <field name="paperformat_id" ref="invoice_gt.paperformat_commercial_invoice" />
+    </record>
+    
+
+    <record id="paperformat_credit_note" model="report.paperformat">
+        <field name="name">Credit Note</field>
+        <field name="default" eval="True"/>
+        <field name="format">Letter</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">40</field>
+        <field name="margin_bottom">25</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">35</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <record id="invoice_gt_action_credit_note" model="ir.actions.report">
+        <field name="name">Credit Note</field>
+        <field name="model">account.move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">invoice_gt.invoice_credit_note</field>
+        <field name="report_file">invoice_gt.invoice_credit_note</field>
+        <field name="binding_model_id" ref="model_account_move"/>
+        <field name="paperformat_id" ref="invoice_gt.paperformat_credit_note" />
+    </record>
+
+    <record id="paperformat_ec" model="report.paperformat">
+        <field name="name">Estado de cuenta</field>
+        <field name="default" eval="True"/>
+        <field name="format">Letter</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">45</field>
+        <field name="margin_bottom">30</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">40</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <record id="invoice_gt_action_state_account" model="ir.actions.report">
+        <field name="name">Estado de cuenta</field>
+        <field name="model">account.move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">invoice_gt.reporte_estado_cuenta</field>
+        <field name="report_file">invoice_gt.reporte_estado_cuenta</field>
+        <field name="binding_model_id" ref="model_account_move"/>
+        <field name="paperformat_id" ref="invoice_gt.paperformat_ec" />
+    </record>
+
+    <record id="invoice_gt_action_state_account_details" model="ir.actions.report">
+        <field name="name">Estado de cuenta detallado</field>
+        <field name="model">account.move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">invoice_gt.reporte_estado_cuenta_detallado</field>
+        <field name="report_file">invoice_gt.reporte_estado_cuenta_detallado</field>
+        <field name="binding_model_id" ref="model_account_move"/>
+        <field name="paperformat_id" ref="invoice_gt.paperformat_ec" />
+    </record>
+
+</odoo>

@@ -1,0 +1,139 @@
+.date{
+    text-align: left;
+    font-size: 22px;
+}
+
+.cont{
+    align-content: center;
+}
+.expdate{
+    padding-top: 25px;
+}
+
+/* .titulos{
+    text-align: center;
+    padding-top: 45px;
+    font-weight: bold;
+    border-bottom: 2px solid black; 
+    display: inline-block; 
+    padding-bottom: 5px; 
+} */
+
+/* .partner_info{
+    padding: 35px;
+    text-align: justify;
+    font-size: 17px;
+} */
+
+.page{
+    padding-left: 35px;
+    padding-right: 35px;
+}
+
+/* .partner_info_table{
+    width: 600px;
+    padding: 35px;
+    text-align: justify;
+    font-size: 17px;
+} */
+
+.partner_info_table .header {
+    text-align: center;
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.partner_info_table {
+    border-collapse: collapse; /* Evita espacios entre bordes */
+    width: 700px;
+    font-size: 17px;
+    
+}
+
+.image-container img {
+    display: block; /* Asegura que la imagen se comporte como bloque */
+    max-width: 400px; /* Asegura que no desborde su contenedor */
+    height: 600px; /* Mantiene proporciones */
+
+}
+
+.partner_info_table .highlight {
+    background-color: #eaf1dd; /* Color de fondo específico */
+    color: #1eb662;
+}
+
+.partner_info_table .luxi {
+    background-color:#dbeef3;
+}
+
+
+.partner_info_table td {
+    padding: 5px 10px; /* Reduce el espacio interno */
+    line-height: 1; /* Ajusta la altura de línea */
+    border: 1px solid black;
+}
+
+.partner_info {
+    text-align: left; /* Alinea el contenido dentro de este contenedor */
+    font-size: 17px;
+}
+
+.partner_info .date {
+    display: inline-block; /* Asegura que el texto esté en línea */
+    margin-right: 10px; /* Deja un espacio entre las fechas */
+}
+
+
+.titulos{
+    text-align: right;
+    font-size: 24px;
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.cuerpo{
+    text-align: justify;
+    font-size: 22px;
+}
+
+.subtitulos{
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+}
+.svg-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+svg {
+    display: block;
+}
+
+.Subs{
+    text-align: rigth;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.cuerpo2{
+    text-align: left;
+    font-size: 22px;
+}
+
+div{
+    overflow: visible; 
+}
+
+#tabla{
+    font-size: 22px;
+}
+
+#tabla th.encabezado {
+    background-color: #dbe5f1;
+    padding: 10px;
+    text-align: left;
+}

@@ -1,0 +1,48 @@
+<odoo>
+    <data>
+        <!-- Form View -->
+        <record id="wizzard_masive_payments_form" model="ir.ui.view">
+            <field name="name">invoice_gt.masive_payments.form</field>
+            <field name="model">invoice.wizzard.payments</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Seleccione Proveedores">
+                    <group>
+                        <!-- filename="document_fname" widget="binary" -->
+                        <field name="upload_file"/>
+                        <field name="journal_id" />
+                        <field name="partner_id" string="Proveedor" />
+                        <field name="payment_method_id" />
+                        <field name="currency_id" />
+                    </group>
+                    <group>
+                        <button name="read_file" string="Generar Lineas" type="object"
+                        class="oe_highlight" invisible="0" />
+                    </group>
+                    <notebook>
+                        <page string="Lineas Pagos">
+                            <field name="lineas">
+                                <list editable="top">
+                                    <field name="company_currency_id" invisible="1" />
+                                    <field name="ref"/>
+                                    <field name="partner_id"/>
+                                    <field name="company_currency_id"/>
+                                    <field name="boleta"/>
+                                    <field name="date" />
+                                    <field name="amount_company_currency_signed" widget="monetary"
+                                        string="Monto" sum="Total" />
+                                    <field name="amount_total_ade" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                    <footer>
+                        <button name="action_generate_payments" string="Generar Pagos"
+                            type="object" class="oe_highlight" />
+                        <button string="Cancelar" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

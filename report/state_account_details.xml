@@ -1,0 +1,180 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <template id="reporte_estado_cuenta_detallado">
+            <t t-call="web.basic_layout">
+                <link rel="stylesheet" href="/invoice_gt/static/src/css/estado_cuenta.css" />
+                
+                <!-- Header -->
+                <div class="header">
+                    <div class="row">
+                        <img style="height: 130px;width: 250px;"
+                            t-if="current_company_id.logo_header" t-att-src="image_data_uri(current_company_id.logo_header)"
+                            alt="logo" />
+                        <div class="col-10 text-center">
+                            <span style="display: block!important; font-weight: 700!important"
+                                t-esc="current_company_id.name" />
+                            <span style="display: block!important" t-esc="current_company_id.street" />
+                            <span style="display: block!important" t-esc="current_company_id.street2" />
+                            <span style="display: block!important" t-esc="current_company_id.city" />
+                            <span t-esc="current_company_id.vat" />
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Loop through currencies -->
+                <t t-foreach="invoices_by_currency_and_journal.items()" t-as="currency_group">
+                    <t t-set="currency" t-value="currency_group[0]" />
+                    <t t-foreach="currency_group[1].items()" t-as="journal_group">
+                        <t t-set="journal" t-value="journal_group[0]" />
+                        <t t-set="invoices" t-value="journal_group[1]['invoices']" />
+                        <t t-set="total_adeudado" t-value="journal_group[1]['total_adeudado']" />
+                        <t t-set="total_vencido" t-value="journal_group[1]['total_vencido']" />
+
+                        <!-- Page for each currency and journal -->
+                        <div class="page" style="page-break-before: always;">
+                            <div class="head_p">
+                                <div class="moneda text-center">
+                                    <h2 class="d-block">Estado de Cuenta al <span t-esc="current_day" /></h2>
+                                    <span class="d-block cc"><t t-esc="currency" /></span>
+                                </div>
+
+                                <div class="text-left col-8 font-weight-normal" style="font-size:15px!important">
+                                    <span class="text-left font-weight-bold"
+                                        style="text-transform:uppercase; text-align: left; display:block; font-size:20px;"
+                                        t-esc="docs[0].partner_id.name" />
+
+                                    <span class="text-left" t-esc="docs[0].partner_id.street2" />
+                                    <span class="text-left">
+                                        <span t-esc="docs[0].partner_id.city" />
+                                        <span t-esc="docs[0].partner_id.country_id.name" />
+                                    </span>
+                                    <span class="text-left d-block">
+                                        <strong>e-mail: </strong>
+                                        <span t-esc="docs[0].partner_id.email" />
+                                    </span>
+                                    <span class="text-left d-block">
+                                        <strong>Teléfono: </strong>
+                                        <span t-esc="docs[0].partner_id.phone" />
+                                    </span>
+                                    <span class="text-left">
+                                        <strong>NIT: </strong>
+                                        <span t-esc="docs[0].partner_id.vat" />
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Table Headers -->
+                            <div class="borde-bottom">
+                                <div class="flex head">
+                                    <div>Fecha de documento</div>
+                                    <div>Serie</div>
+                                    <div>No. de documento</div>
+                                    <div>Fecha Vencimiento</div>
+                                    <div>Días de atraso</div>
+                                    <div>Adeudo Total</div>
+                                </div>
+                                
+                                <!-- Loop through invoices -->
+                                <div t-foreach="invoices" t-as="invoice">
+                                    <div class="cont_sep">
+                                        <span class="sep">Factura</span>
+                                        <div class="flex line">
+                                            <div class="pad"><span t-esc="invoice['date']" /></div>
+                                            <div class="pad"><span t-esc="invoice['serie']" /></div>
+                                            <div class="pad"><span t-esc="invoice['number']" /></div>
+                                            
+                                            <t t-if="invoice['dias_atraso'] &lt; 1">
+                                                <div class="pad"><span t-esc="invoice['invoice_date_due']" /></div>
+                                            </t>
+                                            <t t-if="invoice['dias_atraso'] &gt; 0">
+                                                <div class="pad term"><span t-esc="invoice['invoice_date_due']" /></div>
+                                            </t>
+
+                                            <t t-if="invoice['dias_atraso'] &lt; 1">
+                                                <div class="pad"><span t-esc="invoice['dias_atraso']" /></div>
+                                            </t>
+                                            <t t-if="invoice['dias_atraso'] &gt; 0">
+                                                <div class="pad term"><span t-esc="invoice['dias_atraso']" /></div>
+                                            </t>
+
+                                            <div class="pad text-right pr">
+                                                <span t-esc="currency" />
+                                                <span t-esc="invoice['amount_total']" />
+                                            </div>
+                                        </div>
+
+                                        <!-- Lineas de productos -->
+                                        <div class="product_lines">
+                                            <table class="table table-sm mt-2">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Producto</th>
+                                                        <th>Cantidad</th>
+                                                        <th>Precio Unitario</th>
+                                                        <th>Subtotal</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <t t-foreach="invoice['lines']" t-as="line">
+                                                        <tr>
+                                                            <td><span t-esc="line['product_name']"/></td>
+                                                            <td class="text-right"><span t-esc="line['quantity']"/></td>
+                                                            <td class="text-right"><span t-esc="line['price_unit']"/></td>
+                                                            <td class="text-right"><span t-esc="line['price_subtotal']"/></td>
+                                                        </tr>
+                                                    </t>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Totals -->
+                            <div class="cont_total">
+                                <div class="d-flex justify-content-end linea">
+                                    <strong>Adeudo Total</strong>
+                                    <span><t t-esc="currency" /> </span>
+                                    <span t-esc="total_adeudado" />
+                                </div>
+                                <div class="d-flex justify-content-end linea">
+                                    <strong>Adeudo Vencido</strong>
+                                    <span><t t-esc="currency" /> </span>
+                                    <span t-esc="total_vencido" />
+                                </div>
+                            </div>
+                        </div> <!-- End of .page with page break -->
+                    </t>
+                </t>
+
+                <!-- Footer -->
+                <div class="footer">
+                    <h4 style="font-weight: 800; text-transform: uppercase;">Datos Bancarios</h4>
+                    <div class="d-flex row">
+                        <div class="col-3"
+                            style="font-weight: 700; text-transform: uppercase;
+                        font-size:12px; margin-right: 2rem;">
+                            <div>Banco</div>
+                            <div>Nombre de la cuenta</div>
+                            <div>Cuenta</div>
+                        </div>
+                        <div style="font-size:12px;">
+                            <div>
+                                <span t-esc="current_company_id.cuenta.bank_id.name" />
+                            </div>
+                            <div>
+                                <span t-esc="current_company_id.cuenta.acc_holder_name" />
+                            </div>
+                            <div>
+                                <span t-esc="current_company_id.cuenta.acc_number" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </t>
+        </template>
+    </data>
+</odoo>

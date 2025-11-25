@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_saleorder_inherit_tmp" inherit_id="sale.report_saleorder_document">
+        <xpath expr="//div[@id='informations']" position="after">
+                <div class="col-auto col-4 mw-100 mb-2 d-flex">
+                    <strong>Referencia 1: </strong>
+                    <p style="margin-left:5px;" t-field="doc.referencia_1" />
+                </div>
+
+                <div class="col-auto col-4 mw-100 mb-2 d-flex">
+                    <strong>Referencia 2: </strong>
+                    <p style="margin-left:5px;" t-field="doc.referencia_2" />
+                </div>
+
+                <div class="col-auto col-4 mw-100 mb-2 d-flex">
+                    <strong>Referencia 3: </strong>
+                    <p style="margin-left:5px;" t-field="doc.referencia_3" />
+                </div>
+        </xpath>
+    </template>
+</odoo>

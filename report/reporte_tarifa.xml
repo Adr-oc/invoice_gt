@@ -1,0 +1,550 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="reporte_tarifa">
+            <t t-call="web.html_container">
+                <t t-call="web.basic_layout">
+                    <link rel="stylesheet" href="/invoice_gt/static/src/css/reporte_tarifa.css" />
+                    <div class="partner">
+                        <div style="font-weight: bold;" t-esc="partner_name" />
+                        <div t-esc="partner_contact1" />
+                        <!-- <div t-esc="partner_phone" />
+                        <div t-esc="partner_email" /> -->
+                    </div>
+
+                    <t t-foreach="docs" t-as="o">
+
+                        <div class="page">
+                            <div class="container d-flex justify-content-between align-items-start">
+                                <div class="table-container">
+                                    <table class="partner_info_table">
+                                        <!-- ENCABEZADOS -->
+                                        <thead>
+                                            <tr>
+                                                <td colspan="2" class="header">
+
+                                                    <strong> EMPRESA GUATEMALTECA DE ADMINISTRACIÓN
+                                                        Y MANEJO
+                                                        DE SISTEMAS ADUANEROS </strong>- OPERADOR
+                                                    ECONÓMICO AUTORIZADO OEA. REGISTRO 301 </td>
+                                            </tr>
+                                        </thead>
+                                        <!-- CUERPO DE LA TABLA -->
+                                        <tbody>
+                                            <tr>
+                                                <td class="highlight">Cliente</td>
+                                                <td class="luxi">
+                                                    <t t-esc="o.partner_id.name"></t>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="highlight">Contacto</td>
+                                                <td class="luxi">
+                                                    <t t-esc="o.partner_contact1"></t>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="highlight">Teléfono</td>
+                                                <td class="luxi">
+                                                    <t t-esc="o.phone"></t>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="highlight">E-mail</td>
+                                                <td class="luxi">
+                                                    <t t-esc="o.email"></t>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="highlight">Fecha de expiración de la
+                                                    propuesta</td>
+                                                <td class="luxi">
+                                                    <t t-esc="o.end_date"></t>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="image-container">
+                                    <img style="height: 130px; width: 250px;"
+                                        t-if="o.company_id.logo_header"
+                                        t-att-src="image_data_uri(o.company_id.logo_header)"
+                                        alt="logo" />
+                                </div>
+                            </div>
+                            <br></br>
+                            <br></br>
+                            <div class="partner_info">
+                                <div>
+                                    <div class="date">Guatemala, </div>
+                                </div>
+                                <div class="date">
+                                    <t t-set="meses"
+                                        t-value="{'January': 'Enero', 'February': 'Febrero', 'March': 'Marzo', 'April': 'Abril', 'May': 'Mayo', 'June': 'Junio', 'July': 'Julio', 'August': 'Agosto', 'September': 'Septiembre', 'October': 'Octubre', 'November': 'Noviembre', 'December': 'Diciembre'}" />
+                                    <t t-set="mes" t-value="meses[time.strftime('%B')]" />
+                                    <t t-esc="mes + ' ' + time.strftime('%d, de %Y')" />
+                                </div>
+
+                            </div>
+
+
+                            <div class="main-info">
+                                <!-- ENCABEZADO -->
+
+                                <h1 class="titulos p-4">PROPUESTA DE VALOR</h1>
+                                <strong>
+                                    <p class="cuerpo">SEÑORES <br></br>
+                                            <t t-esc="o.partner_id.name"></t>
+                                    
+                                    <br></br>
+                                        Presente </p>
+                                </strong>
+
+                                <!-- primer cuerpo -->
+                                <div>
+                                    <p class="cuerpo p-4">Es muy grato para nosotros entregarle
+                                        nuestra
+                                        propuesta de servicios profesionales, para la prestación de
+                                        la gestión servicio de desaduanaje dentro de la cadena de
+                                        abastecimiento que ofrece nuestra organización.</p>
+
+
+                                    <!-- SUBTITULO 1 -->
+                                    <svg width="600" height="100" viewBox="0 0 300 100"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <style>
+                                            .subtitulos {
+                                            text-anchor: middle; /* Centra horizontalmente */
+                                            font-size: 24px;
+                                            font-weight: 700;
+                                            fill: black;
+                                            }
+                                        </style>
+                                        <!-- Dibujar el óvalo -->
+                                        <ellipse cx="300" cy="50" rx="130" ry="40" fill="gray" />
+                                        <!-- Agregar texto centrado -->
+                                        <text x="300" y="50" dy="0.35em" class="subtitulos">Quiénes
+                                            Somos:</text>
+                                    </svg>
+
+                                    <br></br>
+                                    <p class="cuerpo">Somos una firma consultora comprometida en la
+                                        prestación de servicios integrales de Comercio Internacional
+                                        al Sector Empresarial en la Región Centroamericana,
+                                        garantizando la productividad de las empresas por medio de
+                                        operaciones logísticas, eficientes, poniendo en practica
+                                        nuestros sistemas
+                                    </p>
+
+                                    <!-- SUBTITULO 2 -->
+                                    <svg width="600" height="100" viewBox="0 0 300 100"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <style>
+                                            .subtitulos {
+                                            text-anchor: middle; /* Centra horizontalmente */
+                                            font-size: 24px;
+                                            font-weight: 700;
+                                            fill: black;
+                                            }
+                                        </style>
+                                        <!-- Dibujar el óvalo -->
+                                        <ellipse cx="300" cy="50" rx="130" ry="40" fill="gray" />
+                                        <!-- Agregar texto centrado -->
+                                        <text x="300" y="50" dy="0.35em" class="subtitulos">Garantía</text>
+                                    </svg>
+
+                                    <br></br>
+                                    <p class="cuerpo">Conocimiento y experiencia en los negocios,
+                                        sus
+                                        riesgos y la industria o sector económico donde opera.</p>
+                                </div>
+                                <!-- SUBTITULO 2 -->
+                                <div>
+                                    <svg width="600" height="100" viewBox="0 0 300 100"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <style>
+                                            .subtitulos {
+                                            text-anchor: middle; /* Centra horizontalmente */
+                                            font-size: 24px;
+                                            font-weight: 700;
+                                            fill: black;
+                                            }
+                                        </style>
+                                        <!-- Dibujar el óvalo -->
+                                        <ellipse cx="300" cy="50" rx="130" ry="40" fill="gray" />
+                                        <!-- Agregar texto centrado -->
+                                        <text x="300" y="50" dy="0.35em" class="subtitulos">Nuestros
+                                            servicios:</text>
+                                    </svg>
+
+                                    <div class="cont">
+                                        <ul class="cuerpo">
+                                            <li>Desaduanaje</li>
+                                            <li>Capacitación</li>
+                                            <li>Consultoría</li>
+                                            <li>Transporte nacional e internacional</li>
+                                            <li>In Plant</li>
+                                        </ul>
+                                    </div>
+
+                                    <h3 class="Subs">1. CAPACITACIÓN </h3>
+                                    <ul class="cuerpo">
+                                        <li>Merceología</li>
+                                        <li>Clasificación arancelaria</li>
+                                        <li>Reglas de origen</li>
+                                        <li>Valoración aduanera</li>
+                                        <li>Procedimientos aduaneros</li>
+                                        <li>Legislación aduanera</li>
+                                        <li>Régimenes suspensivos de pago de impuestos
+                                            por
+                                            las mercancías importadas</li>
+                                        <li>Convenios y Tratados Internacionales</li>
+                                        <li>Propiedad Intelectual</li>
+                                    </ul>
+                                </div>
+                                <br></br>
+                                <br></br>
+                                <div>
+
+                                    <h3 class="Subs">2. ASESORÍA Y CONSULTORÍA</h3>
+                                    <ul class="cuerpo">
+                                        <li>Asesoría Gerencial sobre legislación Aduanera.</li>
+                                        <li>Asesoría sobre los tratados en materia de comercio
+                                            exterior,
+                                            que Guatemala firme con diferentes bloques económicos</li>
+                                        <li>Asesoría para operar Proyectos Empresariales amparados
+                                            bajo
+                                            el decreto 29-89, Ley de Maquila.</li>
+                                        <li>Asesoría para operar Proyectos Empresariales amparados
+                                            bajo
+                                            el decreto 65-89, Ley de zonas francas.</li>
+                                        <li>Asesoría en materia de regímenes aduaneros y su
+                                            aprovechamiento óptimo.</li>
+                                        <li>Asesoría en materia de clasificación arancelaria, con
+                                            enfoque merceológico y técnico.</li>
+                                        <li>Asesoría empresarial en materia tributaria sobre
+                                            impuestos
+                                            internos.</li>
+                                        <li>Asesoría, asistencia y acompañamiento en procesos de
+                                            Defensa
+                                            Tributaria durante la fase Administrativa y en lo
+                                            Contencioso Administrativo.</li>
+                                    </ul>
+                                </div>
+                                <br></br>
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <svg width="600" height="100" viewBox="0 0 300 100"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <style>
+                                        .subtitulos {
+                                        text-anchor: middle; /* Centra horizontalmente */
+                                        font-size: 24px;
+                                        font-weight: 700;
+                                        fill: black;
+                                        }
+                                    </style>
+                                    <!-- Dibujar el óvalo -->
+                                    <ellipse cx="300" cy="50" rx="130" ry="40" fill="gray" />
+                                    <!-- Agregar texto centrado -->
+                                    <text x="300" y="50" dy="0.35em" class="subtitulos">Honorarios
+                                        y pago</text>
+                                </svg>
+
+
+                                <br></br>
+                                <p class="cuerpo">Estimamos que nuestros honorarios para asistirlos
+                                    en el desaduanaje de mercancías se integran de la siguiente
+                                    manera:</p>
+                                <br></br>
+
+                                <!-- TABLA DE TARIFAS -->
+                                <table id="tabla">
+                                    <!-- ENCABEZADOS -->
+                                    <thead>
+                                        <tr>
+                                            <th class="encabezado">DESCRIPCIÓN DEL SERVICIO</th>
+                                            <th class="encabezado">CIFRAS EN GTQ</th>
+                                        </tr>
+                                    </thead>
+                                    <!-- CUERPO DE LA TABLA -->
+                                    <tbody>
+                                        <t
+                                            t-foreach="sorted(o.item_ids, key=lambda line: line.product_tmpl_id.name)"
+                                            t-as="line">
+                                            <tr>
+                                                <td>
+                                                    <t t-esc="line.product_tmpl_id.name"></t>
+                                                </td>
+                                                <td>
+                                                    <t t-esc="'{:,.2f}'.format(line.fixed_price)" />
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                </table>
+                                <br></br>
+                                <br></br>
+                                <div>
+                                    <p class="cuerpo">Los honorarios antes detallados ya incluyen el
+                                        Impuesto al Valor Agregado, traslado de documento y
+                                        fotocopias.
+                                    </p>
+                                    <p class="cuerpo">Notas importantes:
+                                    </p>
+                                    <div class="cuerpo2">
+                                        <t t-raw="o.notas_importantes"></t>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <svg width="600" height="100" viewBox="0 0 300 100"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <style>
+                                            .subtitulos {
+                                            text-anchor: middle; /* Centra horizontalmente */
+                                            font-size: 24px;
+                                            font-weight: 700;
+                                            fill: black;
+                                            }
+                                        </style>
+                                        <!-- Dibujar el óvalo -->
+                                        <ellipse cx="300" cy="50" rx="130" ry="40" fill="gray" />
+                                        <!-- Agregar texto centrado -->
+                                        <text x="300" y="50" dy="0.35em" class="subtitulos">
+                                            Responsabilidades</text>
+                                    </svg>
+
+                                    <br></br>
+                                    <br></br>
+                                    <br></br>
+                                    <p class="cuerpo">El servicio que ofrece Megapolizas en la
+                                        presente propuesta
+                                        incluye:</p>
+                                    <br></br>
+                                    <ul class="cuerpo">
+                                        <li>Elaboración de declaración aduanera</li>
+                                        <li>Gestión en aduana de declaración aduanera hasta que se
+                                            produzca el levante de las mercancías (trámite)</li>
+                                        <li>Mensajería dentro del perímetro de la capital</li>
+                                        <li>Clasificación arancelaria</li>
+                                        <li>Seguimiento de embarque en línea</li>
+                                        <li>Capacitación, cuando el cliente lo solicite.</li>
+                                        <li>Consultoría o Asesoría (Esta debe ser solicitada por el
+                                            cliente específicamente casos concretos y por correo
+                                            electrónico)</li>
+                                        <li>Procesamiento de la información en el sistema aduanero
+                                            con
+                                            la información que consignan los documentos desde
+                                            origen.</li>
+                                    </ul>
+                                </div>
+                                <br></br>
+                                <br></br>
+                                <svg width="600" height="100" viewBox="0 0 300 100"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <style>
+                                        .subtitulos {
+                                        text-anchor: middle; /* Centra horizontalmente */
+                                        font-size: 24px;
+                                        font-weight: 700;
+                                        fill: black;
+                                        }
+                                    </style>
+                                    <!-- Dibujar el óvalo -->
+                                    <ellipse cx="300" cy="50" rx="130" ry="40" fill="gray" />
+                                    <!-- Agregar texto centrado -->
+                                    <text x="300" y="50" dy="0.35em" class="subtitulos">
+                                        Objetivos y Alcances</text>
+                                </svg>
+
+                                <br></br>
+                                <br></br>
+                                <br></br>
+                                <p class="cuerpo">Los objetivos y alcances que se ofrecen en la
+                                    presente propuesta
+                                    son los siguientes:</p>
+                                <ol class="cuerpo">
+                                    <li>Elaboración y transmisión de la Declaración Aduanera de
+                                        importación o exportación, según el caso.</li>
+                                    <li>Presentación ante el sistema selectivo y aleatorio, para el
+                                        correspondiente aforo (Revisión) de las mercancías en el
+                                        recinto aduanero.</li>
+                                    <li>Entregar la documentación autorizada cuando la autoridad
+                                        aduanera libere el embarque que se procesa, esta será
+                                        entregada al transporte designado por el importador.</li>
+                                    <li>Nuestra propuesta de honorarios no incluye almacenaje,
+                                        estadías, demoras, multas, marchamos, impuestos, cuadrilla,
+                                        custodios, transporte, flete o movimiento en falso,
+                                        rectificaciones, seguro de mercancías, manejo de documentos,
+                                        envíos de documentos, ajustes de la SAT y otros; sin
+                                        embargo, estos gastos se pagarán si el cliente lo solicita
+                                        por escrito y deben ser reembolsados por el cliente ya sea
+                                        cuando el cobro se presente de manera directa del proveedor
+                                        del servicio o por medio de liquidación de la cuenta ajena.
+                                        Se exceptúan de estos pagos los fletes nacionales e
+                                        internacionales, estadías, demoras e impuestos. </li>
+                                    <li>Megapolizas se compromete a realizar una correcta
+                                        clasificación arancelaria de las mercancías, si y solo si,
+                                        el cliente envía la información técnica establecida en la
+                                        Ley Nacional de Aduanas, desde que solicita la declaración
+                                        aduanera de importación al analista operador y se lo
+                                        solicita, de lo contrario es responsabilidad del cliente. En
+                                        cuanto a las posiciones arancelarias de las mercancías que
+                                        ya trabaja el importador, debe de enviar a Megapolizas una
+                                        matriz de posiciones arancelaria de las mercancías que
+                                        ingresan o nacionalizan en el territorio nacional, con la
+                                        finalidad de continuar con esas posiciones arancelarias que
+                                        ya trabaja. </li>
+                                    <li>Se aclara que, por políticas de servicio y transparencia
+                                        entre las instituciones del estado y demás entidades,
+                                        Megapolizas no paga impuestos, multas, fletes
+                                        internacionales y demoras. Sin embargo, casos especiales se
+                                        pueden atender, pero debe de existir solicitud directa del
+                                        importador y/o exportador por escrito en correo electrónico.
+                                        Asimismo, el cliente debe estar al día en los pagos con
+                                        MEGAPOLIZAS.</li>
+                                    <li>En caso de existir costos adicionales para el cliente por
+                                        demoras en el desaduanaje de mercancías y estos hayan sido
+                                        ocasionados por negligencia en la gestión de Megapolizas.
+                                        Esta se compromete a resarcir al cliente por el valor máximo
+                                        de 7 veces el valor del honorario que cobra Megapolizas al
+                                        cliente por el embarque que se procesa. </li>
+                                    <li>La administración de personal que trabaja en In Plant es
+                                        responsabilidad directa y estricta de Megapolizas dentro del
+                                        contexto legal correspondiente. Sin embargo, es la entidad
+                                        contratante quien le dará instrucciones directas al personal
+                                        para el desarrollo de su trabajo. Así mismo, en el caso que
+                                        se realicen trabajos especiales que son propios del giro del
+                                        negocio de la entidad importadora, es dicha entidad
+                                        importadora quien los capacitará para lograr la eficiencia
+                                        esperada en esos trabajos especiales en particular. </li>
+                                    <li>La mercancía que traslade Megapolizas o la empresa del grupo
+                                        denominada Mercapal, debe de viajar asegurada por parte del
+                                        importador o exportador, caso contrario, al aceptar esta
+                                        propuesta exime a Megapolizas y a Mercapal de toda
+                                        responsabilidad por cualquier incidente, en caso ésta
+                                        realice los traslados de la mercancía.</li>
+                                    <li>Cualquier operación aduanera se procesará cuando se
+                                        recepcione la documentación completa del embarque. (Facturas
+                                        comerciales, documento de embarque, certificado de origen y
+                                        permisos no arancelarios y otros si procede), estos
+                                        documentos serán inalterables se procesarán tal cual se
+                                        recepcionan de origen. Los documentos que se mencionan
+                                        anteriormente deben de entregar a Megapolizas por lo menos
+                                        con 24 horas de anticipación de manera correcta por parte de
+                                        la entidad importadora.</li>
+                                    <li> La autorización de la presente propuesta por parte del
+                                        exportador o importador se ejecuta en el momento que
+                                        habiliten informáticamente el registro de nuestro agente
+                                        aduanero para la transmisión electrónica correspondiente.
+                                        (El registro es 301) de existir discrepancias, no habilitar
+                                        informáticamente en el servidor de SAT el registro de
+                                        nuestro agente aduanal que se consigna al principio de esta
+                                        propuesta. Esto aplica únicamente cuando se realicen
+                                        operaciones aduaneras con código 301 y registros conexos. </li>
+                                    <li>Tiempo aproximado para desaduanaje posterior al pago de los
+                                        impuestos: 1 día hábil para los embarques que son procesados
+                                        por el sistema selectivo y aleatorio color verde; 3 días
+                                        hábiles para los que son procesados color rojo. Los tiempos
+                                        anteriores son factibles si y solo sí, el importador
+                                        presenta correctamente la información documentada de
+                                        conformidad con la normativa vigente en Guatemala, en cuanto
+                                        a clasificación, valoración y origen de las mercancías, lo
+                                        que implicaría que la autoridad aduanera no realizara ningún
+                                        requerimiento de información o ajuste. Los tiempos
+                                        anteriores aplican únicamente para carga contenedorizada.
+                                        Asimismo, no aplica estos tiempo por caso fortuito o fuerza
+                                        mayor (huelgas, desastres naturales, disturbios civiles,
+                                        pandemias, actos gubernamentales y otros).</li>
+                                    <li>La gestión de los permisos no forma parte de las actividades
+                                        propias del servicio que presta Megapolizas, toda vez que
+                                        las empresas pueden solicitarlos informáticamente ante las
+                                        autoridades correspondientes; la información que se consigna
+                                        en toda la documentación que viene de origen debe ser
+                                        consistente en los mismos, en otras palabras no debe de
+                                        existir información distinta en ningún documento de soporte,
+                                        toda vez que se habilita el riesgo de tener incidentes y
+                                        costos en el momento de desaduanar la mercancía. Los
+                                        principales documentos que se presenta son: (factura
+                                        comercial, documento de embarque, certificado de origen,
+                                        fitosanitario, zoosanitario, etc.) Se aclara que la
+                                        responsabilidad de que los documentos venga correctos es del
+                                        importador o exportador. </li>
+                                    <li>La entidad importadora o exportadora aclara y se compromete
+                                        en el momento de autorizar la declaración aduanera, a
+                                        reembolsar al proveedor de servicios, todos los gastos a
+                                        terceros o cualquier gasto, que ocasionen los embarques, que
+                                        la entidad proveedora de servicios cancele para desaduanar
+                                        las mercancías. Así mismo las partes aclaran que la
+                                        declaración aduanera el cliente la autoriza en cuanto a la
+                                        información que consigna la misma en el momento que paga los
+                                        impuestos, de lo contrario no pagará los impuestos derivados
+                                        del comercio exterior.</li>
+                                    <li>Megapolizas procesará la información con la documentación
+                                        tal cual la entregue el importador o exportador a esta, con
+                                        la finalidad de no tergiversar la información que se
+                                        consigna desde origen. Sin embargo, el cliente es
+                                        responsable solidaria y mancomunadamente por cualquier
+                                        incidente que se dé durante el proceso de validación y
+                                        transmisión de la duca, sobre la información que en la duca
+                                        se consigna. Así mismo, la responsabilidad se amplía ante la
+                                        Superintendencia de Administración Tributaria. El cliente
+                                        aclara que en el caso de querer aprovechar una tarifa
+                                        arancelaria preferencial debe de enviar el certificado de
+                                        origen correcto en el momento de solicitar la duca al
+                                        operador, de lo contrario exime de cualquier responsabilidad
+                                        a Megapolizas.</li>
+                                    <li>El cliente acepta pagar el 2% mensual de intereses
+                                        moratorios cuando no haya rembolsado a Megapolizas los
+                                        gastos de cuenta ajena y los honorarios acordados en el
+                                        tiempo acordado en este documento.</li>
+                                    <li>Las partes se comprometen a velar para que respeten los más
+                                        altos estándares de principios de ética; principalmente la
+                                        lealtad, la confidencialidad en el manejo de la información
+                                        en su conjunto; la honestidad, el respeto, la cortesía.
+                                        Así mismo, se compromete a velar para que el personal que
+                                        intervengan en las operaciones aduaneras que acá se
+                                        proponen, se mantengan en cada entidad, a la que
+                                        pertenezcan, en cualquier tiempo. </li>
+                                </ol>
+                                <h2 class="subtitulos">* * * * * * * * * * * * * * *</h2>
+                                <p class="cuerpo">Es para nosotros motivo de satisfacción,
+                                    presentarle nuestra
+                                    propuesta de servicios de desaduanaje y si los términos de esta
+                                    propuesta son satisfactorios, le rogamos habilitar
+                                    informáticamente el registro 301, ante la Superintendencia de
+                                    Administración Tributaria. Cualquier información adicional con
+                                    respecto al servicio acá propuesto, por favor no dude en
+                                    contactarnos.</p>
+                                <p class="cuerpo">Cordialmente,</p>
+                                <br />
+                                <br />
+                                <div class="cuerpo2">
+                                    <t t-raw="o.datos_asesor"></t>
+                                </div>
+                                <br></br>
+
+                                <div t-if="o.firmar" class="cuerpo2">
+                                    <t t-raw="o.firma"></t>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                    </t>
+
+                    <footer>
+                    </footer>
+                </t>
+
+            </t>
+        </template>
+    </data>
+</odoo>

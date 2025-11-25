@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="invoice_electronic_receipt">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.basic_layout">
+                <link rel="stylesheet" href="invoice_gt/static/src/css/electronic_receipt.css" />
+                <div class="header">
+                    <div class="row">
+                        <img style="height: 130px!important; margin-right: 35px"
+                            t-if="o.company_id.logo_header"
+                            t-att-src="image_data_uri(o.company_id.logo_header)" alt="Logo" />
+                    </div>
+                </div>
+
+                <div class="page container_cancel">
+                    <t t-if="o.state == 'cancel'">
+                        <img class="anulado" src="/invoice_gt/static/src/anulado.png" />
+                    </t>
+
+                    <div class="col-sm-12">
+                        <div class="col-sm-12">
+                            <table class="tableTitle">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center d-block"
+                                            style="font-size:25px!important">ELECTRONIC RECEIPT </th>
+                                        <th class="text-center d-block">
+                                            <span t-esc="o.name" />
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </table>
+                            <br />
+                            <table class="tableInfoPartner">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <table class="tableInfoPartner2">
+                                                <tr>
+                                                    <td>NAME </td>
+                                                    <th>
+                                                        <span t-esc="o.partner_id.name" />
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <th>
+                                                        <span t-esc="o.partner_id.street" />
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <th>
+                                                        <span t-esc="o.partner_id.street2" />
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <td>ID:</td>
+                                                    <th>
+                                                        <span t-esc="o.partner_id.vat" />
+                                                    </th>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td>
+                                            <table class="tableInfoPartner2">
+                                                <tr>
+                                                    <td class="text-center">DATE </td>
+                                                    <th>
+                                                        <span
+                                                            t-esc="o.invoice_date.strftime('%d/%m/%Y')" />
+                                                    </th>
+                                                </tr>
+
+                                                <tr style="margin-left:7px">
+                                                    <td class="text-right">PREPARED BY: </td>
+                                                    <th>
+                                                        <span t-esc="o.create_uid.partner_id.name" />
+                                                    </th>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <br />
+                            <div class="text-center">
+                                <span style="font-weight: 700; font-size: 16px">HOUSE BL</span>
+                                <!-- <span style="font-weight: 700; margin-left: 5px!important;
+                                font-size: 16px" t-esc="o.referencia_bl" /> -->
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                    <div
+                        style="border: 1px solid #000000; padding: 0 1rem 1rem 1rem; width:93%; margin 0 auto; margin-left: 2.2rem; margin-bottom: 10px"
+                    >
+                        <div class="row" style="background-color: #D4D0D0; font-weight: 700;">
+                            <div class="col-4 text-left">We Invoice your account for:</div>
+                            <div class="col-4 text-center">Currency:</div>
+                            <div class="col-4 text-right">Amount</div>
+                        </div>
+
+
+                        <t t-foreach="o.invoice_line_ids" t-as="line">
+
+                            <div class="row p-1">
+                                <t t-if="not line.display_type">
+                                    <div name="td_name" class="col-4 text-left">
+                                        <span t-field="line.name" />
+                                    </div>
+                                    <div name="td_quantity" class="col-4 text-center">
+                                        <span t-field="o.currency_id.name" />
+                                    </div>
+                                    <div name="td_priceunit" class="col-4 text-right">
+                                        <span t-field="line.price_total" />
+                                    </div>
+                                </t>
+                            </div>
+                        </t>
+                    </div>
+
+
+                    <div class="col-sm-12">
+                        <div class="col-sm-12">
+                            <div class="clearfix">
+                                <div id="total" class="row">
+                                    <div
+                                        t-attf-class="#{'col-4' if report_type != 'html' else 'col-sm-7 col-md-5'} ml-auto">
+                                        <table class="table table-sm;page-break-inside: avoid;">
+                                            <tr class="">
+                                                <td>
+                                                    <strong>Total</strong>
+                                                </td>
+                                                <td class="text-right">
+                                                    <span t-field="o.amount_total" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <div style="margin: 0 auto; padding-left: 2.5rem">
+                    <div class="col-sm-12 text-center" style="border: 1px solid #000000; font-size: 13px; padding: 3px;
+                    height: auto!important; width: 97%; ">
+                        <span t-field="o.referencia_bl" />
+                        <span t-field="o.buque_referencia_fel" style="margin-left: 5px" />
+                    </div>
+                </div> -->
+
+
+                </div>
+
+
+                <div class="footer">
+
+                </div>
+                <p style="page-break-before:always;" />
+            </t>
+        </t>
+    </template>
+</odoo>

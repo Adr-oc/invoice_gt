@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Categories -->
+        <record model="ir.module.category" id="module_invoice_gt_electronic_receipt">
+            <field name="name">Electronic Receipt</field>
+            <field name="description">Invoice Electronic Receipt</field>
+            <field name="sequence">20</field>
+        </record>
+
+        <record model="ir.module.category" id="module_invoice_gt_debit_note">
+            <field name="name">Debit Note</field>
+            <field name="description">Invoice Debit Note</field>
+            <field name="sequence">21</field>
+        </record>
+
+        <record model="ir.module.category" id="module_invoice_gt_cuenta_terceros">
+            <field name="name">Cobro Cuenta de Terceros</field>
+            <field name="description">Cobro Cuenta de Terceros</field>
+            <field name="sequence">22</field>
+        </record>
+
+        <record model="ir.module.category" id="module_invoice_gt_commercial_invoice">
+            <field name="name">Commercial Invoice</field>
+            <field name="description">Commercial Invoice</field>
+            <field name="sequence">23</field>
+        </record>
+
+        <record model="ir.module.category" id="module_invoice_gt_credit_note">
+            <field name="name">Credit Note</field>
+            <field name="description">Commercial Invoice</field>
+            <field name="sequence">24</field>
+        </record>
+
+        <!-- Privileges (new in Odoo 19) -->
+        <record id="privilege_electronic_receipt" model="res.groups.privilege">
+            <field name="name">Electronic Receipt</field>
+            <field name="category_id" ref="module_invoice_gt_electronic_receipt"/>
+        </record>
+
+        <record id="privilege_debit_note" model="res.groups.privilege">
+            <field name="name">Debit Note</field>
+            <field name="category_id" ref="module_invoice_gt_debit_note"/>
+        </record>
+
+        <record id="privilege_cuenta_terceros" model="res.groups.privilege">
+            <field name="name">Cuenta de Terceros</field>
+            <field name="category_id" ref="module_invoice_gt_cuenta_terceros"/>
+        </record>
+
+        <record id="privilege_commercial_invoice" model="res.groups.privilege">
+            <field name="name">Commercial Invoice</field>
+            <field name="category_id" ref="module_invoice_gt_commercial_invoice"/>
+        </record>
+
+        <record id="privilege_credit_note" model="res.groups.privilege">
+            <field name="name">Credit Note</field>
+            <field name="category_id" ref="module_invoice_gt_credit_note"/>
+        </record>
+
+        <!-- Groups -->
+        <record id="permission_electronic" model="res.groups">
+            <field name="name">Invoice Electronic Receipt</field>
+            <field name="privilege_id" ref="privilege_electronic_receipt"/>
+        </record>
+
+        <record id="permission_notedebit" model="res.groups">
+            <field name="name">Invoice Debit Note</field>
+            <field name="privilege_id" ref="privilege_debit_note"/>
+        </record>
+
+        <record id="permission_cuenta_terceros" model="res.groups">
+            <field name="name">Cobro Cuenta de Terceros</field>
+            <field name="privilege_id" ref="privilege_cuenta_terceros"/>
+        </record>
+
+        <record id="permission_commercial_invoice" model="res.groups">
+            <field name="name">Commercial Invoice</field>
+            <field name="privilege_id" ref="privilege_commercial_invoice"/>
+        </record>
+
+        <record id="permission_credit_note" model="res.groups">
+            <field name="name">Credit Note</field>
+            <field name="privilege_id" ref="privilege_credit_note"/>
+        </record>
+    </data>
+</odoo>

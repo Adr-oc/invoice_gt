@@ -1,0 +1,23 @@
+
+/* Utilades */
+
+.importante{
+    background-color:  #086022;
+    color: white;
+    font-weight: bold;
+  }
+  
+  
+  .m-inferior{
+    border-bottom: black solid 1px;
+  }
+  
+  .m-right{
+    border-right: black solid 1px;
+  }
+  
+  .inferior{
+    padding-left: 5px;
+    padding-right: 5px;
+    border-bottom: black solid 1px;
+  }

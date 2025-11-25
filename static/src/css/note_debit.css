@@ -1,0 +1,97 @@
+.oficinaBase {
+    border-collapse: collapse;
+    width: 30%;
+    
+  }
+  
+  .tableTitle {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  /* tableTitle, td, th {
+    border: 1px solid black;
+  } */
+  
+  .tableTitle th {
+    border-collapse: collapse;
+    /* width: 100%; */
+    padding-left: 25px;
+    padding-right: 25px;
+    font-size: 16px;
+  }
+  
+  
+  .tableName {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  .tableInfoPartner {
+    font-size: 13px;
+    width: 100%;
+    border: 1px solid black;
+  }
+  
+  .tableInfoPartner2 td {
+    border-collapse: collapse;
+    padding-left: 25px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    padding-right: 25px;
+  }
+  
+  .tableHouseBL {
+    border-bottom: 1px;
+    font-size: 15px;
+    /* border-collapse: collapse; */
+    width: 100%;
+  }
+  
+  .oficinaBase td, .oficinaBase th {
+      border-top: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
+      padding: 3px;
+  }
+  
+  .cuerpoTable {
+    border: 1px solid black;
+  }
+  
+  
+  .cuerpoTable td {
+    border-collapse: collapse;
+    padding-left: 25px;
+    padding-bottom: 5px;
+    padding-right: 25px;
+  }
+  
+  .cuerpoTable th {
+      /* border-top: 1px solid #ddd; */
+      /* border-bottom: 1px solid #ddd; */
+      padding: 15px;
+  }
+  .tipoCambioSize{
+    
+    font-size: 15px;
+  }
+  
+  .firmas {
+      border-collapse: collapse;
+    width: 100%;
+  }
+  
+  .firmas td, .firmas th {
+    border-top: 1px solid #ddd;
+    /* border-bottom: 1px solid #ddd; */
+    padding-top: 25px;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: center;
+  }
+  
+  .img-footer img {
+      /* margin-top: 100px; */
+      max-height: 100px; 
+      max-width: 100px;
+  }

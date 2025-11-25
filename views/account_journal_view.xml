@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="invoice_gt_account_journal" model="ir.ui.view">
+        <field name="name">account.journal.form</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.view_account_journal_form"/>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <!-- <xpath expr="//page[@name='journal_entries']/field[@name='currency_id']" position="inside"> -->
+                <field name="currency_id" position="after">
+                    <field name="partner_id" invisible="1" />
+                    <field name="bank_instruccion" domain="[('partner_id.id', '=', partner_id)]" invisible="type not in ('sale', 'purchase')" options="{'no_create': True, 'no_create_edit':True}" />
+                </field>
+            <!-- </xpath> -->
+        </field>
+    </record>
+
+    <record id="account_payment_register_form_description" model="ir.ui.view">
+        <field name="name">account.payment.register.form</field>
+        <field name="model">account.payment.register</field>
+        <field name="inherit_id" ref="account.view_account_payment_register_form"/>
+        <field name="arch" type="xml">
+                <field name="group_payment" position="after">
+                    <field name="descripcion" />
+                    <field name="no_negociable"/>
+                    <field name="boleta"/>
+                </field>
+                <field name="payment_date" position="after">
+                    <field name="fecha_aplicacion" string="Fecha de Aplicacion"/>
+                    <field name="partner_app" string="Contacto de Pago"/>
+                    <field name="nombre_impreso" string="Nombre Impreso"/>
+                </field>
+
+        </field>
+    </record>
+
+    <record id="account_bank_lineas_negociable" model="ir.ui.view">
+        <field name="name">account.bank.statement.line.tree.bank_rec_widget</field>
+        <field name="model">account.bank.statement.line</field>
+        <field name="inherit_id" ref="account_accountant.view_bank_statement_line_tree_bank_rec_widget"/>
+        <field name="arch" type="xml">
+                <field name="ref" position="after">
+                    <field name="no_negociable" optional="show"/>
+                </field>
+        </field>
+    </record>
+
+     <!-- Define la vista del informe -->
+    <record id="paperformat_voucher_bi" model="report.paperformat">
+        <field name="name">VOUCHER BI GT</field>
+        <field name="default" eval="True"/>
+        <field name="format">Letter</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">24</field>
+        <field name="margin_bottom">3</field>
+        <field name="margin_left">10</field>
+        <field name="margin_right">3</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">10</field>
+        <field name="dpi">90</field>
+    </record>
+    
+    <record id="voucher_bi_operaciones" model="ir.actions.report">
+        <field name="name">Voucher BI</field>
+        <field name="model">account.bank.statement.line</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">invoice_gt.voucher_bi</field>
+        <field name="report_file">invoice_gt.voucher_bi</field>
+        <field name="paperformat_id" ref="paperformat_voucher_bi" />
+    </record>
+
+    <record id="voucher_bi_operaciones_assukargo" model="ir.actions.report">
+        <field name="name">Formato de pago Assukargo</field>
+        <field name="model">account.bank.statement.line</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">invoice_gt.voucher_bi_assukargo</field>
+        <field name="report_file">invoice_gt.voucher_bi_assukargo</field>
+        <!-- <field name="paperformat_id" ref="paperformat_voucher_bi" /> -->
+    </record>
+
+</odoo>

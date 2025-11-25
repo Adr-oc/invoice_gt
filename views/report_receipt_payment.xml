@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="recibo_de_caja" inherit_id="account.report_payment_receipt_document">
+            <xpath expr="//t[@t-name='account.report_payment_receipt_document']" position="replace">
+                <t t-call="web.basic_layout">
+                    <link rel="stylesheet" href="invoice_gt/static/src/css/clases.css" />
+                    <t t-set="o" t-value="o.with_context(lang=lang)" />
+                    <div class="header row" style="border-bottom: 2px solid rgb(173, 172, 172); padding-bottom: 15px">
+                        <div class="col-2 text-center">
+                            <img style="height: 110px; width: 100%; text-align: left!important;" t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" alt="Logo" />
+                        </div>
+
+                        <div class="col-5 text-center" style="font-size: 15px">
+                            <span style="font-weight: 600; text-align" class="company_address d-block" t-field="o.company_id.partner_id" />
+
+                            <span class="company_address" t-field="o.company_id.street" />
+
+                            <span class="company_address" t-field="o.company_id.street2" />
+
+                            <span class="company_address" t-field="o.company_id.city" />
+
+                            <span class="company_address" t-field="o.company_id.country_id" />
+
+                            <span class="company_address d-block" t-field="o.company_id.phone" />
+                        </div>
+
+                        <div class="col-5 text-center">
+                            <div style="border-radius: 5px; border: 1px solid black;">
+                                <p style="text-transform: uppercase; margin: 0; padding: 0; font-weight: 700;">Recibo de caja Electronico</p>
+                                <span style="color:red; margin-left: 5px;" t-esc="o.name" />
+                            </div>
+                            <div style="margin-right:15px;">
+                                <div class="row" style="border-top: 1px solid black; border-radius: 5px; font-weight: 700;">
+                                    <div class="col-4" style="border-right: 1px solid black;">Día</div>
+                                    <div class="col-4" style="border-right: 1px solid black;">Mes</div>
+                                    <div class="col-4">Año</div>
+                                </div>
+                                <div class="row" style="border-top: 1px solid black; border-radius: 5px;">
+                                    <div class="col-4" style="border-right: 1px solid black; border-top:1px solid black;">
+                                        <span t-esc="o.date.strftime('%d')" />
+                                    </div>
+                                    <div class="col-4" style="border-right: 1px solid black; border-top:1px solid black;">
+                                        <span t-esc="o.date.strftime('%m')" />
+                                    </div>
+                                    <div class="col-4" style="border-top:1px solid black;">
+                                        <span t-esc="o.date.strftime('%Y')" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <t t-if="o.company_id.id == 1">
+                        <div class="page">
+                            <div style="border: 2px solid black;">
+                                <div class="d-flex" style="padding: 5px" >
+                                    <div class="col-6">
+                                        <strong style="text-transform: uppercase;">Recibimos de:</strong>
+                                        <span style="margin-left: 5px" t-esc="o.partner_id.name" />
+                                    </div>
+                                    <div class="col-6">
+                                        <strong style="text-transform: uppercase;">Recibo:</strong>
+                                        <span style="margin-left: 5px; color:red" t-esc="o.name" />
+                                    </div>
+                                </div>
+                                <div style="padding: 5px" class="d-flex">
+                                    <div class="col-6">
+                                        <strong style="text-transform: uppercase">Nit:</strong>
+                                        <span style="margin-left: 5px" t-esc="o.partner_id.vat"/>
+                                    </div>
+                                    <div class="col-6">
+                                        <strong style="text-transform: uppercase">Telefono:</strong>
+                                        <span style="margin-left: 5px" t-esc="o.partner_id.phone"/>
+                                    </div>
+                                </div>
+                                <div style="padding: 5px" class="row">
+                                    <div class="col-6">
+                                        <strong style="text-transform: uppercase">Método de pago:</strong>
+                                        <span t-esc="o.payment_method_id.name" />
+                                    </div>
+                                    <div class="col-6">
+                                        <strong style="text-transform: uppercase">Valor:</strong>
+                                        <span t-esc="o.amount" />
+                                    </div>
+                                </div>
+
+                                <div class="text-center" style="border-top: 1.5px solid black; border-bottom: 1px solid black; padding: 5px">
+                                    <strong style="text-transform: uppercase;">Descripcion</strong>
+                                </div>
+
+                                <div class="text-left" style="height: auto; padding: 5px">
+                                    <div class="d-flex">
+                                        <div class="col-6 importante text-center ">
+                                            CONCEPTO
+                                        </div>
+
+                                        <div class="col-6 importante text-center ">
+                                            VALOR
+                                        </div>
+                                    </div>
+                                    <div class="d-flex m-inferior"  style="height: 85px;">
+                                        <div class="col-6 m-right">
+                                            <span t-esc="o.task_id.name" /><br/>
+                                            <div class="text-left" style="height: auto; padding: 5px">
+                                                <t t-set="invoices" t-value="[]" />
+                                                <t t-foreach="o.reconciled_invoice_ids" t-as="invoice">
+                                                    <t t-if="invoice.x_studio_nmero_de_dte">
+                                                        <t t-set="invoices" t-value="invoices + [invoice.x_studio_nmero_de_dte]" />
+                                                    </t>
+                                                    <t t-else="">
+                                                        <t t-set="invoices" t-value="invoices + [invoice.name]" />
+                                                    </t>
+                                                </t>
+                                                <span t-esc="' - '.join(invoices)" />
+                                            </div>
+                                            <t t-if="o.monthly_payment">
+                                                <span>Cuota no. <t t-esc="o.monthly_payment.number" /> </span>
+                                            </t>
+                                            
+                                            <!-- <t t-set="partials" t-value="o.move_id._get_reconciled_invoices_partials()[0]"/>
+                                            <t t-foreach="partials" t-as="fac">
+                                                <span><t t-esc="fac[0].debit_move_id.move_id.name"/> <t t-esc="fac[0].debit_move_id.move_id.amount_total"
+                                                 t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/></span><br/>
+                                            </t>  -->
+                                        </div>
+                                        <div class="col-6">VENDEDOR:
+                                        </div>
+                                    </div>
+                                    <div class="d-flex" style="height: 100px;">
+                                        <div class="col-6 m-right">
+                                            <div class="importante text-center">INTEGRACION DEL PAGO</div>
+                                            <div class="d-flex">
+                                                <div class="col-4"></div>
+                                                <div class="col-4 text-center ">BANCO</div>
+                                                <div class="col-4 text-center ">MONTO</div>
+                                            </div> 
+                                            
+                                            <div class="d-flex" style="height: 30px;">
+                                                <div class="col-4">EFECTIVO</div>
+                                                <div class="col-4 inferior"></div>
+                                                <div class="col-4 inferior"></div>
+                                            </div>
+                                            <div class="d-flex" style="height: 30px;">
+                                                <div class="col-4">CHEQUE</div>
+                                                <div class="col-4"></div>
+                                                <div class="col-4"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div  class="importante text-center">OPERADOR</div>
+                                            <div class="d-flex">
+                                                <div class="col-1"></div>
+                                                <div class="col-10 text-center" style="padding-top: 30px;"><span t-esc="o.create_uid.name"/></div>
+                                                <div class="col-1"></div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-center importante" style="border-top: 1px solid black; border-bottom: 1px solid black; text-transform: uppercase; padding: 5px; font-weight: 700">MEMO</div>
+                                <div><span t-esc="o.ref"/></div>
+                                <div class="text-center" style="border-top: 1px solid black; border-bottom: 1px solid black; text-transform: uppercase; padding: 5px; font-weight: 700">Detalle de cheque</div>
+                                <div class="center" style="border-bottom: 1px solid black;">
+                                    <div class="row text-center" style="font-weight: 700;text-transform: uppercase;">
+                                        <div class="col-4">Boleta/Cheque</div>
+                                        <div class="col-4">Banco</div>
+                                        <div class="col-4">Fecha</div>
+                                    </div>
+                                    <div class="row text-center">
+                                        <div class="col-4"><span t-esc="o.boleta"/></div>
+                                        <div class="col-4"><span t-esc="o.banco"/></div>
+                                        <div class="col-4">
+                                            <span t-esc="o.date.strftime('%d-%m-%Y')"/>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row text-center" style="padding: 5px;">
+                                    <div class="col-9" style="border-right: 1px solid black;">
+                                        <span t-esc="o.num_a_letras(o.amount)" />
+                                    </div>
+                                    <div class="col-3">
+                                        <span style="font-weight: 700; text-transform:uppercase;">total.</span>
+                                        <span style="margin-left: 3px" t-esc="o.amount" />
+                                        <span t-esc="o.currency_id.name" />
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </t>
+                    <t t-else="">
+                        <div class="page">
+                            <div style="border: 2px solid black;">
+                                <div style="padding: 5px">
+                                    <strong style="text-transform: uppercase">Nit:</strong>
+                                    <span style="margin-left: 5px" t-esc="o.partner_id.vat"/>
+                                </div>
+
+                                <div style="padding: 5px">
+                                    <strong style="text-transform: uppercase;">Recibimos de:</strong>
+                                    <span style="margin-left: 5px" t-esc="o.partner_id.name" />
+                                </div>
+
+                                <div style="padding: 5px" class="d-flex">
+                                    <strong style="text-transform: uppercase">Método de pago:</strong>
+                                    <span t-esc="o.payment_method_id.name" />
+                                    <div style="margin-left:500px; text-transform: uppercase">
+                                        <strog style="text-transform: uppercase; font-weight: 700;">Valor:</strog>
+                                        <span t-esc="o.amount" />
+                                    </div>
+                                </div>
+
+                                <div class="text-center" style="border-top: 1.5px solid black; border-bottom: 1px solid black; padding: 5px">
+                                    <strong style="text-transform: uppercase;">Descripcion</strong>
+                                </div>
+
+                                <div class="text-left" style="height: auto; padding: 5px">
+                                    <t t-set="invoices" t-value="[]" />
+                                    <t t-foreach="o.reconciled_invoice_ids" t-as="invoice">
+                                        <t t-if="invoice.x_studio_nmero_de_dte">
+                                            <t t-set="invoices" t-value="invoices + [invoice.x_studio_nmero_de_dte]" />
+                                        </t>
+                                        <t t-else="">
+                                            <t t-set="invoices" t-value="invoices + [invoice.name]" />
+                                        </t>
+                                    </t>
+                                    <span t-esc="' - '.join(invoices)" />
+                                </div>
+                                
+                                
+
+                                <div class="text-center" style="border-top: 1px solid black; border-bottom: 1px solid black; text-transform: uppercase; padding: 5px; font-weight: 700">Detalle de cheque</div>
+                                <div class="center" style="border-bottom: 1px solid black;">
+                                    <div class="row text-center" style="font-weight: 700;text-transform: uppercase;">
+                                        <div class="col-4">Boleta/Cheque</div>
+                                        <div class="col-4">Banco</div>
+                                        <div class="col-4">Fecha</div>
+                                    </div>
+                                    <div class="row text-center">
+                                        <div class="col-4"><span t-esc="o.boleta"/></div>
+                                        <div class="col-4"><span t-esc="o.banco"/></div>
+                                        <div class="col-4">
+                                            <span t-esc="o.date.strftime('%d-%m-%Y')"/>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row text-center" style="padding: 5px;">
+                                    <div class="col-9" style="border-right: 1px solid black;">
+                                        <span t-esc="o.num_a_letras(o.amount)" />
+                                    </div>
+                                    <div class="col-3">
+                                        <span style="font-weight: 700; text-transform:uppercase;">total.</span>
+                                        <span style="margin-left: 3px" t-esc="o.amount" />
+                                        <span t-esc="o.currency_id.name" />
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </t>
+                    <div class="footer">
+                        <img style="height: 110px; width: 100%; text-align: left!important;" t-if="o.company_id.logo_footer" t-att-src="image_data_uri(o.company_id.logo_footer)" alt="Logo" />
+                    </div>
+                </t>
+            </xpath>
+
+        </template>
+    </data>
+
+</odoo>
+ 

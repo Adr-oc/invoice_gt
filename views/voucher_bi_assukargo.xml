@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="voucher_bi_assukargo">
+        <t t-call="web.basic_layout">
+            <t t-foreach="docs" t-as="o">
+                <div class="page" style="font-size:15px; font-family: Times and Roman, Tahoma, Arial, sans-serif;">
+                    <div>
+                        <div class="row">
+                            <div class="col-6" style="padding-left:100px;">
+                                <span>GUATEMALA</span>
+                                <span t-esc="o.date.strftime('%d')" />
+                                <span> DE </span>
+                                <span t-esc="o.current_date_format(o.date).upper()" />
+                                <span> DEL </span>
+                                <span t-esc="o.date.strftime('%Y')" />
+                            </div>
+                            <div style="text-align:right; padding-right:30px;" class="col-3">
+                                <span t-esc="'{0:,.2f}'.format(abs(o.amount))" />
+                            </div>
+                            <div class="col-4"></div>
+                        </div>
+                        <div style="padding-left:100px; margin-top:8px">
+                            <span style="width:1000px;" t-esc="o.partner_id.name" t-options="{'widget':'text'}" />
+                        </div>
+                        <div style="padding-left:100px; margin-top:8px;">
+                            <span>***</span>
+                            <span style="width:1000px;" t-esc="o.num_a_letras(o.amount).upper()" />
+                            <span>***</span>
+                        </div>
+                        <div class="row" style="margin-top:55px; margin-left:140px; font-size:20px; height:21px;">
+                            <div class="col-12">
+                                <t t-if="o.no_negociable == True">
+                                    <span>NO NEGOCIABLE</span>
+                                </t>
+                            </div>
+                        </div>
+                        <div class="row" style="padding-left:100px; margin-top:90px; height: 50px;">
+                            <div class="col-12">
+                                <span t-esc="o.payment_ref" />
+                            </div>
+                        </div>
+                        <div class="row" style="padding-left:65px; margin-top:30px;">
+                            <div class="col-4" style="text-align: center;">
+                                <span>001</span>
+                            </div>
+                            <div class="col-4">
+                                <span style="font-size:24px; text-align: center; padding-left:20px;" t-esc="o.codigo()" />
+                            </div>
+                            <div class="col-2">
+                                <span t-esc="o.tipo()" />
+                            </div>
+                            <div class="col-2">
+                                <span t-esc="o.ref" />
+                            </div>
+                        </div>
+                        <div style="padding-left:65px; margin-top:80px;">
+                            <t t-set="cuenta" t-value="o.cuentas_contables()" />
+                            <t t-foreach="cuenta['cuentas']" t-as="cuenta">
+                                <div class="row">
+                                    <div class="col-2" style="padding-left:15px;">
+                                        <span t-esc="cuenta[0]" />
+                                    </div>
+                                    <div class="col-5">
+                                        <span t-esc="cuenta[1]" />
+                                    </div>
+                                    <div class="col-2" style="text-align: right; padding-right:10px;">
+                                        <span t-esc="'{0:,.2f}'.format(cuenta[2])" />
+                                    </div>
+                                    <div class="col-2" style="text-align: right;">
+                                        <span t-esc="'{0:,.2f}'.format(cuenta[3])" />
+                                    </div>
+                                    <div class="col-1"></div>
+                                </div>
+                            </t>
+                            
+                            <div style="height: 250px; margin-top:50px; padding-left:20px;"></div>
+                            <div class="row" style="margin-top:50px; padding-left:15px; font-size:13px;">
+                                <div class="col-2">
+                                    <span t-esc="o.create_uid.partner_id.name" />
+                                </div>
+                                <div class="col-2">
+                                    <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y %H:%M:%S')" />
+                                </div>
+                                <div class="col-8"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p style="page-break-before:always;" />
+            </t>
+        </t>
+    </template>
+</odoo>

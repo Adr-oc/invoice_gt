@@ -1,0 +1,154 @@
+.borde {
+  border: 1px solid #000000;
+}
+
+.headd {
+  font-weight: 700;
+}
+
+.head {
+  font-size: 50px;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-top: 1px solid #000000;
+  font-weight: 700;
+}
+
+.flex {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+}
+
+.head > div {
+  width: 200px;
+  font-size: 20px;
+  text-align: center;
+  white-space: normal;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.line > div {
+  width: 200px;
+  font-size: 15px;
+  text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+
+div.lines:nth-child(even) {
+  background-color: #e5dede;
+  border-radius: 5px;
+}
+
+.pad {
+  padding: 0 5px;
+}
+
+.term {
+  color: red;
+}
+
+.pr {
+  padding-right: 20px;
+}
+
+.borde-bottom {
+  border-bottom: 1px solid #000000;
+}
+
+.cont_total {
+  margin: 0;
+  padding: 10px;
+  max-width: 100%;
+  page-break-inside: avoid;
+  font-size: 18px;
+  margin: 0;
+  padding: 10px;
+  max-width: 100%;
+  page-break-inside: avoid;
+  font-size: 18px;
+  margin-top: 1rem;
+  word-wrap: break-word;
+  display: block;
+  text-align: right;
+}
+
+.d-flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cont_total strong, .cont_total span {
+  font-size: 0.9em;
+}
+
+
+.head_p > h2 {
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+  font-size: 45px;
+  font-weight: 700;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.head_p > div {
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+
+.linea {
+  border-bottom: 2px solid #e5dede;
+}
+
+.moneda{
+  margin: 0;
+}
+
+.moneda h2{
+  font-weight: 800;
+  font-size: 40px;
+  margin: 0;
+}
+
+.moneda .cc{
+  font-weight: 600;
+  font-size: 30px;
+}
+.cont_sep{
+  background-color: #e6e1e1;
+  border-radius: 5px;
+  border: 1.2 solid #000000;
+  margin: 5px;
+  padding: 5px;
+}
+
+.sep{
+  font-weight: 700;
+}
+
+.seps{
+  background-color: #bdbdbd;
+}
+
+.head_lines > div{
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.line {
+  page-break-inside: avoid;
+  overflow-wrap: break-word;
+}
+
+.custom_footer {
+  margin-top: 20px;
+}
