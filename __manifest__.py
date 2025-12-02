@@ -55,7 +55,7 @@
         'views/pricelist.xml',
         'report/reporte_tarifa.xml',
         'report/invoice.xml',
-        'views/button.xml',
+        # 'views/button.xml',
         'views/masive_payments.xml',
     ],
     'css': [
@@ -67,8 +67,8 @@
     
     'assets': {
         'web.assets_backend': [
-            '/invoice_gt/static/src/js/tree_button.js',
-            '/invoice_gt/static/src/xml/tree_button.xml',
+            # '/invoice_gt/static/src/js/tree_button.js',
+            # '/invoice_gt/static/src/xml/tree_button.xml',
 
         ],
         'web.assets_qweb': [

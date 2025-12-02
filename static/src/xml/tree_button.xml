@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<!-- <?xml version="1.0" encoding="UTF-8"?>
 <templates>
     <t t-name="button_time.ListView.Buttons" t-inherit="web.ListView.Buttons">
         <xpath expr="//*[@class='btn btn-primary o_list_button_add']" position="after">
@@ -12,4 +12,4 @@
             </button>
         </xpath>
     </t>
-</templates>
+</templates> -->
