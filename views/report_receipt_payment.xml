@@ -101,11 +101,11 @@
                                     </div>
                                     <div class="d-flex m-inferior"  style="height: 85px;">
                                         <div class="col-6 m-right">
-                                            <span t-esc="o.task_id.name" /><br/>
+                                            <t t-if="'task_id' in o._fields and o.task_id"><span t-esc="o.task_id.name"/><br/></t>
                                             <div class="text-left" style="height: auto; padding: 5px">
                                                 <t t-set="invoices" t-value="[]" />
                                                 <t t-foreach="o.reconciled_invoice_ids" t-as="invoice">
-                                                    <t t-if="invoice.x_studio_nmero_de_dte">
+                                                    <t t-if="'x_studio_nmero_de_dte' in invoice._fields and invoice.x_studio_nmero_de_dte">
                                                         <t t-set="invoices" t-value="invoices + [invoice.x_studio_nmero_de_dte]" />
                                                     </t>
                                                     <t t-else="">
@@ -114,7 +114,7 @@
                                                 </t>
                                                 <span t-esc="' - '.join(invoices)" />
                                             </div>
-                                            <t t-if="o.monthly_payment">
+                                            <t t-if="'monthly_payment' in o._fields and o.monthly_payment">
                                                 <span>Cuota no. <t t-esc="o.monthly_payment.number" /> </span>
                                             </t>
                                             
@@ -159,7 +159,7 @@
                                     </div>
                                 </div>
                                 <div class="text-center importante" style="border-top: 1px solid black; border-bottom: 1px solid black; text-transform: uppercase; padding: 5px; font-weight: 700">MEMO</div>
-                                <div><span t-esc="o.ref"/></div>
+                                <div><span t-esc="o.memo"/></div>
                                 <div class="text-center" style="border-top: 1px solid black; border-bottom: 1px solid black; text-transform: uppercase; padding: 5px; font-weight: 700">Detalle de cheque</div>
                                 <div class="center" style="border-bottom: 1px solid black;">
                                     <div class="row text-center" style="font-weight: 700;text-transform: uppercase;">
@@ -220,7 +220,7 @@
                                 <div class="text-left" style="height: auto; padding: 5px">
                                     <t t-set="invoices" t-value="[]" />
                                     <t t-foreach="o.reconciled_invoice_ids" t-as="invoice">
-                                        <t t-if="invoice.x_studio_nmero_de_dte">
+                                        <t t-if="'x_studio_nmero_de_dte' in invoice._fields and invoice.x_studio_nmero_de_dte">
                                             <t t-set="invoices" t-value="invoices + [invoice.x_studio_nmero_de_dte]" />
                                         </t>
                                         <t t-else="">
@@ -229,8 +229,6 @@
                                     </t>
                                     <span t-esc="' - '.join(invoices)" />
                                 </div>
-                                
-                                
 
                                 <div class="text-center" style="border-top: 1px solid black; border-bottom: 1px solid black; text-transform: uppercase; padding: 5px; font-weight: 700">Detalle de cheque</div>
                                 <div class="center" style="border-bottom: 1px solid black;">
@@ -264,7 +262,9 @@
                         </div>
                     </t>
                     <div class="footer">
-                        <img style="height: 110px; width: 100%; text-align: left!important;" t-if="o.company_id.logo_footer" t-att-src="image_data_uri(o.company_id.logo_footer)" alt="Logo" />
+                        <t t-if="'logo_footer' in o.company_id._fields and o.company_id.logo_footer">
+                            <img style="height: 110px; width: 100%; text-align: left!important;" t-att-src="image_data_uri(o.company_id.logo_footer)" alt="Logo" />
+                        </t>
                     </div>
                 </t>
             </xpath>
