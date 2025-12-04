@@ -62,6 +62,48 @@ class AccountBankStatementLine(models.Model):
         else:
             texto = ''
         return texto
+
+    def get_facturas_conciliadas(self):
+        """Obtiene las facturas conciliadas con esta línea de extracto bancario"""
+        facturas = []
+        if not self.move_id:
+            return facturas
+
+        # Buscar las líneas del asiento que tienen conciliaciones
+        for line in self.move_id.line_ids:
+            # Buscar en matched_debit_ids y matched_credit_ids
+            for partial in line.matched_debit_ids:
+                move = partial.debit_move_id.move_id
+                if move.move_type in ('out_invoice', 'out_refund', 'in_invoice', 'in_refund'):
+                    facturas.append({
+                        'name': move.name,
+                        'partner': move.partner_id.name,
+                        'amount_total': move.amount_total,
+                        'amount_residual': move.amount_residual,
+                        'amount_paid': partial.amount,
+                        'currency': move.currency_id.name,
+                    })
+            for partial in line.matched_credit_ids:
+                move = partial.credit_move_id.move_id
+                if move.move_type in ('out_invoice', 'out_refund', 'in_invoice', 'in_refund'):
+                    facturas.append({
+                        'name': move.name,
+                        'partner': move.partner_id.name,
+                        'amount_total': move.amount_total,
+                        'amount_residual': move.amount_residual,
+                        'amount_paid': partial.amount,
+                        'currency': move.currency_id.name,
+                    })
+
+        # Eliminar duplicados basados en el nombre de la factura
+        seen = set()
+        unique_facturas = []
+        for f in facturas:
+            if f['name'] not in seen:
+                seen.add(f['name'])
+                unique_facturas.append(f)
+
+        return unique_facturas
     
     
 class AccountPaymentRegister(models.TransientModel):
