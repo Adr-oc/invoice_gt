@@ -10,13 +10,6 @@ class AccountJournal(models.Model):
 
     
 
-    bank_instruccion = fields.Many2one('res.partner.bank', "Instrucción de banco" )
-    partner_id = fields.Char(compute="compute_bank_instruccion")
-
-
-    # @api.depends('bank_instruccion')
-    def compute_bank_instruccion(self):
-        for line in self:
-            line.partner_id = line.company_id.partner_id.id
-
-    
+    bank_instruccion = fields.Many2one('res.partner.bank', "Instrucción de banco")
+    # NOTA: partner_id ya existe como Many2one en account.journal base
+    # No se debe redefinir como Char. Campo eliminado para evitar conflictos.
