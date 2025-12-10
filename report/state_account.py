@@ -65,7 +65,6 @@ class estadoCuenta(models.AbstractModel):
             invoice = {
                 "name" : record.name,
                 "partner_id" : record.partner_id.id,
-                "number" : record.x_studio_nmero_de_dte,
                 "serie" : record.x_studio_serie,
                 "date" : record.date.strftime("%d/%m/%Y"),
                 "invoice_date_due" : record.invoice_date_due.strftime("%d/%m/%Y"),

@@ -92,7 +92,6 @@ class WizzardUploadPayments(models.TransientModel):
                             SELECT *
                             FROM account_move
                             WHERE (x_studio_serie ILIKE %s
-                            OR x_studio_nmero_de_dte ILIKE %s
                             OR ref ILIKE %s
                             OR referencia_1 ILIKE %s
                             OR referencia_2 ILIKE %s)
