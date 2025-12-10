@@ -9,4 +9,3 @@ from . import res_company
 from . import send_mail_am
 from . import res_partner
 from . import pricelist
-from . import payments

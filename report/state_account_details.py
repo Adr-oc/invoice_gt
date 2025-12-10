@@ -18,7 +18,16 @@ class estadoCuenta(models.AbstractModel):
             
         now = datetime.today().strftime('%d-%m-%Y')
 
-       
+        query = """ select am.x_studio_nmero_de_dte as name, am.name as doc, am.x_studio_serie , am.date, am.ref, am.invoice_date_due,
+                        am.amount_total, am.amount_residual, am.id as id_factura, am.journal_id as diario,
+                        rc.name as moneda,
+                        rp.name as cliente, rp.street2, rp.city, rc2.name as country, rp.email, rp.phone, rp.vat
+                        from account_move am
+                        inner join res_currency rc on am.currency_id = rc.id
+                        inner join res_partner rp on am.partner_id = rp.id
+                        left join res_country rc2  on rp.country_id  = rc2.id
+                    where am.id in (%s)
+                    and am.payment_state in ('not_paid', 'partial') """
 
         line_query = """SELECT aml.product_id, aml.name as product_name, aml.quantity, aml.price_unit, aml.price_subtotal
                         FROM account_move_line aml

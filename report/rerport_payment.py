@@ -59,6 +59,7 @@ class PaymentReportxlsx(models.Model):
                 # valida si existe serie de documento
                 serie = record.x_studio_serie or ""
                 # valida si existe nmro de documento
+                doc = record.x_studio_nmero_de_dte or record.name
 
                 for line in record.line_ids:
                     if line.product_id:

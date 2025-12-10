@@ -215,6 +215,9 @@
                                 <div class="text-left" style="height: auto; padding: 5px">
                                     <t t-set="invoices" t-value="[]" />
                                     <t t-foreach="o.reconciled_invoice_ids" t-as="invoice">
+                                        <t t-if="'x_studio_nmero_de_dte' in invoice._fields and invoice.x_studio_nmero_de_dte">
+                                            <t t-set="invoices" t-value="invoices + [invoice.x_studio_nmero_de_dte]" />
+                                        </t>
                                         <t t-else="">
                                             <t t-set="invoices" t-value="invoices + [invoice.name]" />
                                         </t>

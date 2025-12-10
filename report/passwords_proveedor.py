@@ -41,6 +41,7 @@ class ReportePassword(models.AbstractModel):
             purchase_order_factura = self.env['account.move'].create({
                 'x_studio_serie':x.Serie,
                 'ref': x.partner_ref,
+                'x_studio_nmero_de_dte': x.Factura,
                 'invoice_payment_term_id': x.Pago,
                 'partner_id': x.partner_id,
                 'invoice_origin': x.name,
